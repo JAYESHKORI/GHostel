@@ -32,4 +32,6 @@ public class Const
     public static final String API_URL = "http://192.168.43.31/ghostel/";
     public static final String API_HOSTELLIST = "hostellist.php";
     public static final String API_BLOCKLIST = "blocklist.php";
+    public static final String API_ADDNEWBLOCK = "inst_block.php";
+    public static final String API_ADDNEWHOSTEL = "inst_hostel.php";
 }

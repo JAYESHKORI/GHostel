@@ -23,10 +23,19 @@
         android:layout_below="@+id/spn_addB_hostelList"
         android:id="@+id/et_addB_bname"/>
 
-    <RadioGroup
+    <EditText
+        android:id="@+id/et_Bcapacity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_addB_bname"
+        android:layout_margin="20dp"
+        android:hint="Capacity"
+        android:inputType="number" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_Bcapacity"
         android:layout_marginLeft="20dp"
         android:id="@+id/rg_addB_type">
 
@@ -34,21 +43,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Boys"
+            android:text="Boys"
+            android:checked="true"
             android:id="@+id/rb_addB_boys"/>
 
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Girls"
+            android:text="Girls"
             android:id="@+id/rb_addB_girls"/>
 
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Both"
+            android:text="Both"
             android:id="@+id/rb_addB_both"/>
     </RadioGroup>
 

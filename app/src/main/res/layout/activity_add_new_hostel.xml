@@ -24,21 +24,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Boys"
-            android:id="@+id/rb_boys"/>
+            android:text="Boys"
+            android:id="@+id/rb_boys"
+            android:checked="true"/>
 
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Girls"
+            android:text="Girls"
             android:id="@+id/rb_girls"/>
 
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Both"
+            android:text="Both"
             android:id="@+id/rb_both"/>
     </RadioGroup>
 
