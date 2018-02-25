@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jayesh.ghostel.Activity.AddNewRector">
+
+    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/ic_dp"
+            android:id="@+id/addRact_iv_dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name"
+            android:id="@+id/addRact_et_fname"
+            android:layout_margin="20dp"
+            android:text="Ramanbhai"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Last Name"
+            android:id="@+id/addRact_et_lname"
+            android:layout_margin="20dp"
+            android:text="Chaganbhai"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Middle Name"
+            android:id="@+id/addRact_et_mname"
+            android:layout_margin="20dp"
+            android:text="Desai"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select Date"
+            android:id="@+id/addRact_tv_dob"
+            android:textSize="18dp"
+            android:layout_margin="20dp"
+            android:text="23-8-1998"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:id="@+id/addRact_et_email"
+            android:layout_margin="20dp"
+            android:inputType="textEmailAddress"
+            android:text="Ramanbhai@gmail.com"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contact"
+            android:id="@+id/addRact_et_contact"
+            android:layout_margin="20dp"
+            android:inputType="phone"
+            android:text="0987654321"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Permenant Address"
+            android:id="@+id/addRact_et_address"
+            android:layout_margin="20dp"
+            android:minLines="2"
+            android:text="2,narol,ahmedabad"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Emergency Contact"
+            android:id="@+id/addRact_et_em_contact"
+            android:layout_margin="20dp"
+            android:inputType="phone"
+            android:text="0987654321"/>
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/addRact_spn_hostel"
+            android:layout_margin="20dp">
+        </android.support.v7.widget.AppCompatSpinner>
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/addRact_spn_block"
+            android:layout_margin="20dp">
+        </android.support.v7.widget.AppCompatSpinner>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addRact_btn_add"
+            android:text="CREATE RECTOR"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"/>
+
+    </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

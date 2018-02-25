@@ -10,13 +10,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.example.jayesh.ghostel.Fragment.Block;
-import com.example.jayesh.ghostel.Fragment.Hostel;
+import com.example.jayesh.ghostel.Fragment.LoadBlockList;
+import com.example.jayesh.ghostel.Fragment.LoadHostelList;
+import com.example.jayesh.ghostel.Fragment.LoadRectorList;
 import com.example.jayesh.ghostel.R;
 
 public class AdminActivity extends AppCompatActivity
@@ -81,11 +80,11 @@ public class AdminActivity extends AppCompatActivity
         Fragment fragment =null;
 
         if (id == R.id.nav_hostel) {
-            fragment = new Hostel();
+            fragment = new LoadHostelList();
         } else if (id == R.id.nav_blocks) {
-            fragment = new Block();
+            fragment = new LoadBlockList();
         } else if (id == R.id.nav_rectors) {
-
+            fragment = new LoadRectorList();
         } else if (id == R.id.nav_mess) {
 
         } else if (id == R.id.nav_share) {

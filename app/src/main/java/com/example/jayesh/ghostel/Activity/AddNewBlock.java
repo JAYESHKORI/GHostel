@@ -116,7 +116,7 @@ public class AddNewBlock extends AppCompatActivity implements View.OnClickListen
         final RadioButton radioButton = (RadioButton) findViewById(selectedId);
 
         if (!hostelType.equals(radioButton.getText().toString())) {
-            Toast.makeText(AddNewBlock.this,"Block and Hostel Types are not matching",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddNewBlock.this,"LoadBlockList and LoadHostelList Types are not matching",Toast.LENGTH_SHORT).show();
         }
         else if(et_BName.getText().toString().equals(""))
         {

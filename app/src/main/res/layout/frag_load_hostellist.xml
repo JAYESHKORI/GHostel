@@ -23,6 +23,4 @@
         android:clickable="true"
         app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@android:drawable/ic_input_add" />
-
-
 </RelativeLayout>

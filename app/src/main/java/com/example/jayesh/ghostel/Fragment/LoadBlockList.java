@@ -20,11 +20,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jayesh.ghostel.Activity.AddNewBlock;
-import com.example.jayesh.ghostel.Activity.AddNewHostel;
 import com.example.jayesh.ghostel.Adapter.BlockListAdapter;
-import com.example.jayesh.ghostel.Adapter.HostelListAdapter;
 import com.example.jayesh.ghostel.Model.BlockListData;
-import com.example.jayesh.ghostel.Model.HostelListData;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.Utils.Const;
 
@@ -37,7 +34,7 @@ import java.util.ArrayList;
  * Created by jayesh on 19/2/18.
  */
 
-public class Block extends Fragment
+public class LoadBlockList extends Fragment
 {
     private static final String ARG_PARAM3 = "param3";
     private static final String ARG_PARAM4 = "param4";
@@ -56,13 +53,13 @@ public class Block extends Fragment
     private String mParam3;
     private String mParam4;
 
-    public Block() {
+    public LoadBlockList() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static Block newInstance(String param3, String param4) {
-        Block fragment = new Block();
+    public static LoadBlockList newInstance(String param3, String param4) {
+        LoadBlockList fragment = new LoadBlockList();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM3, param3);
         args.putString(ARG_PARAM4, param4);
@@ -83,7 +80,7 @@ public class Block extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.frag_block, container, false);
+        view =  inflater.inflate(R.layout.frag_load_blocklist, container, false);
         rv_block_list = (RecyclerView)view.findViewById(R.id.rv_block_list);
         rv_block_list.setLayoutManager(new LinearLayoutManager(getActivity()));
         blockListDataArrayList = new ArrayList<>();

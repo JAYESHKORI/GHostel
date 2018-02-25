@@ -61,7 +61,7 @@ public class AddNewHostel extends AppCompatActivity {
             Log.d("type",radioButton.getText().toString());
 
             final ProgressDialog progressDialog = new ProgressDialog(AddNewHostel.this);
-            progressDialog.setMessage("Creating New Block..");
+            progressDialog.setMessage("Creating New Hostel..");
             progressDialog.show();
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
