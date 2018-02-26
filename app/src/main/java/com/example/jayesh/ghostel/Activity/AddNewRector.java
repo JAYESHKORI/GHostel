@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,7 @@ import com.example.jayesh.ghostel.Utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -59,10 +61,14 @@ public class AddNewRector extends AppCompatActivity{
     private Bitmap bitmap;
 
     private final int IMG_REQUEST = 1;
+
+    private String extension=".png";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_rector);
+
+        bitmap = BitmapFactory.decodeResource(AddNewRector.this.getResources(), R.mipmap.ic_dp);
 
         et_fname = (EditText)findViewById(R.id.addRact_et_fname);
         et_lname = (EditText)findViewById(R.id.addRact_et_lname);
@@ -126,11 +132,11 @@ public class AddNewRector extends AppCompatActivity{
             Toast.makeText(AddNewRector.this,"Date of Birth Required",Toast.LENGTH_SHORT).show();
         else if(et_email.getText().toString().equals(""))
             Toast.makeText(AddNewRector.this,"Email Required",Toast.LENGTH_SHORT).show();
-        else if(et_contact.getText().toString().equals(""))
+        else if(et_contact.getText().toString().equals("")||et_contact.getText().toString().length()!=10)
             Toast.makeText(AddNewRector.this,"Contact Required",Toast.LENGTH_SHORT).show();
         else if(et_address.getText().toString().equals(""))
             Toast.makeText(AddNewRector.this,"Address Required",Toast.LENGTH_SHORT).show();
-        else if(et_em_contact.getText().toString().equals(""))
+        else if(et_em_contact.getText().toString().equals("")||et_em_contact.getText().toString().length()!=10)
             Toast.makeText(AddNewRector.this,"Emergency contact Required",Toast.LENGTH_SHORT).show();
         else
         {
@@ -146,8 +152,9 @@ public class AddNewRector extends AppCompatActivity{
             Log.e("contact",et_contact.getText().toString());
             Log.e("address",et_address.getText().toString());
             Log.e("emergency contact",et_em_contact.getText().toString());
-            Log.e("Hostel Id",spn_hostel.getSelectedItem().toString());
-            Log.e("Block Id",spn_block.getSelectedItem().toString());
+            Log.e("Hostel Id",String.valueOf(hostelListIdAL.get(spn_hostel.getSelectedItemPosition())));
+            Log.e("Block Id",String.valueOf(blockListIdAL.get(spn_block.getSelectedItemPosition())));
+            Log.e("dp",imageToString(bitmap));
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
                     + Const.API_ADDNEWRECTOR,
@@ -155,7 +162,14 @@ public class AddNewRector extends AppCompatActivity{
                         @Override
                         public void onResponse(String response) {
                             progressDialog.dismiss();
-                            Toast.makeText(AddNewRector.this,response,Toast.LENGTH_LONG).show();
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                response = jsonObject.getString("response");
+                                Toast.makeText(AddNewRector.this,response,Toast.LENGTH_LONG).show();
+                                iv_dp.setImageResource(0);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     },
                     new Response.ErrorListener() {
@@ -178,9 +192,10 @@ public class AddNewRector extends AppCompatActivity{
                     params.put("contact",et_contact.getText().toString());
                     params.put("address",et_address.getText().toString());
                     params.put("em_contact",et_em_contact.getText().toString());
-                    params.put("hostelid",spn_hostel.getSelectedItem().toString());
-                    params.put("blockid",spn_block.getSelectedItem().toString());
+                    params.put("hostelid",String.valueOf(hostelListIdAL.get(spn_hostel.getSelectedItemPosition())));
+                    params.put("blockid",String.valueOf(blockListIdAL.get(spn_block.getSelectedItemPosition())));
                     params.put("password",tv_dob.getText().toString());
+                    params.put("dp",imageToString(bitmap));
                     return params;
                 }
             };
@@ -223,6 +238,7 @@ public class AddNewRector extends AppCompatActivity{
         if (requestCode == IMG_REQUEST && resultCode == RESULT_OK && data != null)
         {
             Uri path = data.getData();
+//            extension =  path.substring(path.lastIndexOf("."));
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),path);
                 iv_dp.setImageBitmap(bitmap);
@@ -230,6 +246,14 @@ public class AddNewRector extends AppCompatActivity{
                 e.printStackTrace();
             }
         }
+    }
+
+    private String imageToString(Bitmap bitmap)
+    {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        byte[] imgBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgBytes,Base64.DEFAULT);
     }
 
     private void load_hostelList()
@@ -321,13 +345,5 @@ public class AddNewRector extends AppCompatActivity{
         );
         RequestQueue requestQueue = Volley.newRequestQueue(AddNewRector.this);
         requestQueue.add(stringRequest);
-    }
-
-    private String imageToString(Bitmap bitmap)
-    {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
-        byte[] imgBytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(imgBytes,Base64.DEFAULT);
     }
 }
