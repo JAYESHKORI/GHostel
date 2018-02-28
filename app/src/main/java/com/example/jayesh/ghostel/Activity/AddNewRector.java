@@ -30,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.Utils.Const;
+import com.example.jayesh.ghostel.Utils.RealPathUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -155,6 +156,7 @@ public class AddNewRector extends AppCompatActivity{
             Log.e("Hostel Id",String.valueOf(hostelListIdAL.get(spn_hostel.getSelectedItemPosition())));
             Log.e("Block Id",String.valueOf(blockListIdAL.get(spn_block.getSelectedItemPosition())));
             Log.e("dp",imageToString(bitmap));
+            Log.e("extension",extension);
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
                     + Const.API_ADDNEWRECTOR,
@@ -196,6 +198,7 @@ public class AddNewRector extends AppCompatActivity{
                     params.put("blockid",String.valueOf(blockListIdAL.get(spn_block.getSelectedItemPosition())));
                     params.put("password",tv_dob.getText().toString());
                     params.put("dp",imageToString(bitmap));
+                    params.put("extension",extension);
                     return params;
                 }
             };
@@ -238,7 +241,8 @@ public class AddNewRector extends AppCompatActivity{
         if (requestCode == IMG_REQUEST && resultCode == RESULT_OK && data != null)
         {
             Uri path = data.getData();
-//            extension =  path.substring(path.lastIndexOf("."));
+            String realPath = RealPathUtil.getRealPathFromURI_API19(this, data.getData());
+            extension =  realPath.substring(realPath.lastIndexOf("."));
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),path);
                 iv_dp.setImageBitmap(bitmap);
