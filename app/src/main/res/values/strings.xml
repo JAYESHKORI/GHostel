@@ -8,4 +8,11 @@
     <string name="action_settings">Settings</string>
 
     <string name="api_no_internet_msg">Please check internet connection.</string>
+
+    <string-array name="usertype">
+        <item>STUDENT</item>
+        <item>RECTOR</item>
+        <item>MESS CONTRACTOR</item>
+        <item>ADMIN</item>
+    </string-array>
 </resources>

@@ -30,7 +30,10 @@
         <activity android:name=".Activity.AddNewBlock" />
         <activity android:name=".Activity.AddNewRector" />
         <activity android:name=".Activity.AddNewContractor" />
-        <activity android:name=".Activity.AddNewStudent"></activity>
+        <activity android:name=".Activity.AddNewStudent" />
+        <activity android:name=".Activity.StudentActivity" />
+        <activity android:name=".Activity.RectorActivity" />
+        <activity android:name=".Activity.ContractorActivity"></activity>
     </application>
 
 </manifest>

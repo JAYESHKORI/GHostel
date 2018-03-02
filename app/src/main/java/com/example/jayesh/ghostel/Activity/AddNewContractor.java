@@ -190,7 +190,7 @@ public class AddNewContractor extends AppCompatActivity{
                     params.put("last_name",et_lname.getText().toString());
                     params.put("middle_name",et_mname.getText().toString());
                     params.put("dob",tv_dob.getText().toString());
-                    params.put("email",et_email.getText().toString());
+                    params.put("email",et_email.getText().toString().toLowerCase());
                     params.put("contact",et_contact.getText().toString());
                     params.put("address",et_address.getText().toString());
                     params.put("em_contact",et_em_contact.getText().toString());

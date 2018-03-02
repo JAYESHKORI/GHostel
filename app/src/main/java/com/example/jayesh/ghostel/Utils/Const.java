@@ -37,4 +37,8 @@ public class Const
     public static final String API_ADDNEWRECTOR = "inst_rector.php";
     public static final String API_ADDNEWCONTRACTOR = "inst_contractor.php";
     public static final String API_ADDNEWSTUDENT = "inst_student.php";
+    public static final String API_VALIDATEUSER = "validateuser.php";
+    public static final String API_RECTORLIST = "rectorlist.php";
+    public static final String API_CONTRACTORLIST = "contractorlist.php";
+    public static final String API_STUDENTLIST = "studentlist.php";
 }
