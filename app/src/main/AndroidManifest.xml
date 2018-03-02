@@ -28,7 +28,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.AddNewHostel" />
         <activity android:name=".Activity.AddNewBlock" />
-        <activity android:name=".Activity.AddNewRector"></activity>
+        <activity android:name=".Activity.AddNewRector" />
+        <activity android:name=".Activity.AddNewContractor"></activity>
     </application>
 
 </manifest>

@@ -35,4 +35,5 @@ public class Const
     public static final String API_ADDNEWBLOCK = "inst_block.php";
     public static final String API_ADDNEWHOSTEL = "inst_hostel.php";
     public static final String API_ADDNEWRECTOR = "inst_rector.php";
+    public static final String API_ADDNEWCONTRACTOR = "inst_contractor.php";
 }
