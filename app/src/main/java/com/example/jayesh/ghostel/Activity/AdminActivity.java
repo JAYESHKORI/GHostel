@@ -17,6 +17,7 @@ import com.example.jayesh.ghostel.Fragment.LoadBlockList;
 import com.example.jayesh.ghostel.Fragment.LoadContractorList;
 import com.example.jayesh.ghostel.Fragment.LoadHostelList;
 import com.example.jayesh.ghostel.Fragment.LoadRectorList;
+import com.example.jayesh.ghostel.Fragment.LoadStudentList;
 import com.example.jayesh.ghostel.R;
 
 public class AdminActivity extends AppCompatActivity
@@ -88,8 +89,8 @@ public class AdminActivity extends AppCompatActivity
             fragment = new LoadRectorList();
         } else if (id == R.id.nav_mess) {
             fragment = new LoadContractorList();
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.nav_student) {
+            fragment = new LoadStudentList();
         } else if (id == R.id.nav_send) {
 
         }

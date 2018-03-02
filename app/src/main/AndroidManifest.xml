@@ -29,7 +29,8 @@
         <activity android:name=".Activity.AddNewHostel" />
         <activity android:name=".Activity.AddNewBlock" />
         <activity android:name=".Activity.AddNewRector" />
-        <activity android:name=".Activity.AddNewContractor"></activity>
+        <activity android:name=".Activity.AddNewContractor" />
+        <activity android:name=".Activity.AddNewStudent"></activity>
     </application>
 
 </manifest>
