@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:hint="Enter Your Email"
-            android:text="admin"
             android:inputType="textEmailAddress" />
 
         <EditText
@@ -29,16 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:hint="Enter Your Password"
-            android:text="admin"
             android:inputType="textPassword" />
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:entries="@array/usertype"
-            android:id="@+id/spn_usertype">
-        </Spinner>
 
         <Button
             android:text="Login"

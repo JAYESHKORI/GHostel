@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jayesh.ghostel.R;
+import com.example.jayesh.ghostel.SharedPrefrences.Session;
 import com.example.jayesh.ghostel.Utils.Const;
 
 import org.json.JSONArray;
@@ -31,11 +32,13 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText et_login_Email,et_login_Pwd;
-    private Spinner spn_usertype;
     private Button btnLogin;
     private TextView tvSignup;
 
     private int id = 0;
+    private String usertype = "X";
+
+    private Session session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +46,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         et_login_Email = (EditText) findViewById(R.id.et_login_Email);
         et_login_Pwd = (EditText) findViewById(R.id.et_login_Pwd);
-        spn_usertype = (Spinner)findViewById(R.id.spn_usertype);
         btnLogin = (Button)findViewById(R.id.btnLogin);
         tvSignup = (TextView)findViewById(R.id.tvSignup);
 
         btnLogin.setOnClickListener(this);
         tvSignup.setOnClickListener(this);
+
+        session = new Session(LoginActivity.this);
     }
     @Override
     public void onClick(View view) {
@@ -64,18 +68,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void userLogin() {
-        String email = et_login_Email.getText().toString().trim();
+        final String email = et_login_Email.getText().toString().trim();
         String password = et_login_Pwd.getText().toString().trim();
         if(TextUtils.isEmpty(email)||TextUtils.isEmpty(password))
         {
             Toast.makeText(this,"Fields are empty",Toast.LENGTH_SHORT).show();
             return;
         }
-        else if(!spn_usertype.getSelectedItem().equals("ADMIN"))
+        else
         {
             Log.d("username",et_login_Email.getText().toString());
             Log.d("password",et_login_Pwd.getText().toString());
-            Log.d("usertype",spn_usertype.getSelectedItem().toString());
 
             final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
             progressDialog.setMessage("Validating user..");
@@ -91,35 +94,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LoginActivity.this,response,Toast.LENGTH_SHORT).show();
                             try {
                                 JSONArray jsonArray = new JSONArray(response);
-                                if(jsonArray.getJSONObject(0).getInt("response")==1)
+                                id = jsonArray.getJSONObject(0).getInt("id");
+                                usertype = jsonArray.getJSONObject(0).getString("usertype");
+
+                                if(id>0)
                                 {
-                                    id = jsonArray.getJSONObject(0).getInt("id");
-                                    Log.d("id",String.valueOf(jsonArray.getJSONObject(0).getInt("id")));
-                                }
-                                else if(jsonArray.getJSONObject(0).getInt("response")==0)
-                                {
-                                    Toast.makeText(LoginActivity.this,"Invalid credentials",Toast.LENGTH_SHORT).show();
+                                    switch (usertype.charAt(0))
+                                    {
+                                        case 'A':
+                                            startActivity(new Intent(LoginActivity.this,AdminActivity.class));
+                                            finish();
+                                            break;
+                                        case 'S':
+                                            session.setid(id);
+                                            session.setUsername(email);
+                                            session.setUsertype("S");
+                                            startActivity(new Intent(LoginActivity.this,StudentActivity.class));
+                                            finish();
+                                            break;
+                                        case 'R':
+                                            startActivity(new Intent(LoginActivity.this,RectorActivity.class));
+                                            finish();
+                                            break;
+                                        case 'C':
+                                            startActivity(new Intent(LoginActivity.this,ContractorActivity.class));
+                                            finish();
+                                            break;
+                                    }
                                 }
                                 else
-                                {
-                                    Toast.makeText(LoginActivity.this,"Try again",Toast.LENGTH_SHORT).show();
-                                }
-
-                                if (spn_usertype.getSelectedItem().equals("STUDENT"))
-                                {
-                                    Intent i = new Intent(LoginActivity.this, StudentActivity.class);
-                                    startActivity(i);
-                                }
-                                else if(spn_usertype.getSelectedItem().equals("RECTOR"))
-                                {
-                                    Intent i = new Intent(LoginActivity.this, RectorActivity.class);
-                                    startActivity(i);
-                                }
-                                else if(spn_usertype.getSelectedItem().equals("MESS CONTRACTOR"))
-                                {
-                                    Intent i = new Intent(LoginActivity.this, ContractorActivity.class);
-                                    startActivity(i);
-                                }
+                                    Toast.makeText(LoginActivity.this,"Invalid credentials",Toast.LENGTH_SHORT).show();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -139,22 +143,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("username",et_login_Email.getText().toString());
                     params.put("password",et_login_Pwd.getText().toString());
-                    params.put("usertype",spn_usertype.getSelectedItem().toString());
                     return params;
                 }
             };
             RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
             requestQueue.add(stringRequest);
-        }
-        else
-        {
-            if (et_login_Email.getText().toString().equals("admin")&&et_login_Pwd.getText().toString().equals("admin"))
-            {
-                Intent i = new Intent(LoginActivity.this, AdminActivity.class);
-                startActivity(i);
-            }
-            else
-                Toast.makeText(LoginActivity.this,"No such user",Toast.LENGTH_SHORT).show();
         }
     }
 }
