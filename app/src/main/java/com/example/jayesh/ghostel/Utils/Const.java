@@ -41,4 +41,5 @@ public class Const
     public static final String API_RECTORLIST = "rectorlist.php";
     public static final String API_CONTRACTORLIST = "contractorlist.php";
     public static final String API_STUDENTLIST = "studentlist.php";
+    public static final String API_SAVEQR = "inst_code.php";
 }

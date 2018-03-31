@@ -1,5 +1,6 @@
 package com.example.jayesh.ghostel.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +15,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.SharedPrefrences.Session;
+import com.example.jayesh.ghostel.Utils.Const;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class StudentActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btn_breakfast,btn_lunch,btn_dinner;
@@ -72,32 +82,70 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         String time = new SimpleDateFormat("HH").format(new Date());
-        switch (view.getId())
-        {
+        String qr = "";
+        String title = "";
+        switch (view.getId()) {
             case R.id.btn_breakfast:
-                if(Integer.parseInt(time)<7)
-                startActivity(new Intent(StudentActivity.this,ShowQRCodeActivity.class).putExtra("title","Breakfast")
-                        .putExtra("value",date+session.getid()+session.getUsername()+"B"));
-                else
-                    Toast.makeText(StudentActivity.this,"Contact Your Mess Contractor",Toast.LENGTH_SHORT).show();
+                if (Integer.parseInt(time) < 7) {
+                    qr = date + session.getid() + session.getUsername() + "B";
+                    title = "Breakfast";
+                } else
+                    Toast.makeText(StudentActivity.this, "Contact Your Mess Contractor", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_lunch:
-                if(Integer.parseInt(time)<9)
-                startActivity(new Intent(StudentActivity.this,ShowQRCodeActivity.class).putExtra("title","Lunch")
-                        .putExtra("value",date+session.getid()+session.getUsername()+"L"));
-                else
-                    Toast.makeText(StudentActivity.this,"Contact Your Mess Contractor",Toast.LENGTH_SHORT).show();
+                if (Integer.parseInt(time) < 9) {
+                    qr = date + session.getid() + session.getUsername() + "L";
+                    title = "Lunch";
+                } else
+                    Toast.makeText(StudentActivity.this, "Contact Your Mess Contractor", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.btn_dinner:
-                if(Integer.parseInt(time)<18)
-                startActivity(new Intent(StudentActivity.this,ShowQRCodeActivity.class).putExtra("title","Dinner")
-                        .putExtra("value",date+session.getid()+session.getUsername()+"D"));
-                else
-                    Toast.makeText(StudentActivity.this,"Contact Your Mess Contractor",Toast.LENGTH_SHORT).show();
-                break;
-        }
+            case R.id.btn_dinner: {
+                if (Integer.parseInt(time) < 18) {
+                    qr = date + session.getid() + session.getUsername() + "D";
+                    title = "Dinner";
 
+                } else
+                    Toast.makeText(StudentActivity.this, "Contact Your Mess Contractor", Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+        saveQR(qr,title);
     }
 
+    private void saveQR(final String qr, final String title)
+    {
+        final ProgressDialog progressDialog = new ProgressDialog(StudentActivity.this);
+        progressDialog.setMessage("Generating QR..");
+        progressDialog.show();
 
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
+                + Const.API_SAVEQR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        startActivity(new Intent(StudentActivity.this, ShowQRCodeActivity.class).putExtra("title", title)
+                                .putExtra("value", qr));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Log.e("Error",error.toString());
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("code",qr);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(StudentActivity.this);
+        requestQueue.add(stringRequest);
+
+    }
 }
