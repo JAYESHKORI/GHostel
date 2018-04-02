@@ -102,6 +102,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     switch (usertype.charAt(0))
                                     {
                                         case 'A':
+                                            session.setid(id);
+                                            session.setUsername(email);
+                                            session.setUsertype("A");
                                             startActivity(new Intent(LoginActivity.this,AdminActivity.class));
                                             finish();
                                             break;
@@ -113,10 +116,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             finish();
                                             break;
                                         case 'R':
+                                            session.setid(id);
+                                            session.setUsername(email);
+                                            session.setUsertype("R");
                                             startActivity(new Intent(LoginActivity.this,RectorActivity.class));
                                             finish();
                                             break;
                                         case 'C':
+                                            session.setid(id);
+                                            session.setUsername(email);
+                                            session.setUsertype("C");
                                             startActivity(new Intent(LoginActivity.this,ContractorActivity.class));
                                             finish();
                                             break;

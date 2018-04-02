@@ -6,12 +6,10 @@ import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +54,7 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_student,menu);
+        getMenuInflater().inflate(R.menu.menu_option,menu);
         return true;
     }
 
@@ -65,9 +63,9 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
         int id = item.getItemId();
         switch (id)
         {
-            case R.id.student_settings:
+            case R.id.settings:
                 break;
-            case R.id.student_logout:
+            case R.id.logout:
                 session.setid(0);
                 session.setUsername("");
                 session.setUsertype("X");
@@ -89,6 +87,7 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
                 if (Integer.parseInt(time) < 7) {
                     qr = date + session.getid() + session.getUsername() + "B";
                     title = "Breakfast";
+                    saveQR(qr,title);
                 } else
                     Toast.makeText(StudentActivity.this, "Contact Your Mess Contractor", Toast.LENGTH_SHORT).show();
                 break;
@@ -96,6 +95,7 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
                 if (Integer.parseInt(time) < 9) {
                     qr = date + session.getid() + session.getUsername() + "L";
                     title = "Lunch";
+                    saveQR(qr,title);
                 } else
                     Toast.makeText(StudentActivity.this, "Contact Your Mess Contractor", Toast.LENGTH_SHORT).show();
                 break;
@@ -103,13 +103,12 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
                 if (Integer.parseInt(time) < 18) {
                     qr = date + session.getid() + session.getUsername() + "D";
                     title = "Dinner";
-
+                    saveQR(qr,title);
                 } else
                     Toast.makeText(StudentActivity.this, "Contact Your Mess Contractor", Toast.LENGTH_SHORT).show();
                 break;
             }
         }
-        saveQR(qr,title);
     }
 
     private void saveQR(final String qr, final String title)
