@@ -1,7 +1,9 @@
 package com.example.jayesh.ghostel.Fragment;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,7 +12,10 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -86,6 +91,7 @@ public class LoadHostelList extends Fragment {
         view =  inflater.inflate(R.layout.frag_load_hostellist, container, false);
         rv_hostel_list = (RecyclerView)view.findViewById(R.id.rv_hostel_list);
         rv_hostel_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         hostelListDataArrayList = new ArrayList<>();
         loadHostelListsData();
 

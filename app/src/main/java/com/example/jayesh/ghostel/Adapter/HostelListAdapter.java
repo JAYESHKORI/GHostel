@@ -1,6 +1,8 @@
 package com.example.jayesh.ghostel.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.jayesh.ghostel.Activity.ViewHostelActivity;
 import com.example.jayesh.ghostel.Model.HostelListData;
 import com.example.jayesh.ghostel.R;
 
@@ -29,7 +32,7 @@ public class HostelListAdapter extends RecyclerView.Adapter<HostelListAdapter.My
     private Context caller;
     private ArrayList<HostelListData> hostelListData;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tv_ad_id,tv_ad_name,tv_ad_type,tv_ad_description;
 
@@ -40,13 +43,43 @@ public class HostelListAdapter extends RecyclerView.Adapter<HostelListAdapter.My
             tv_ad_name = (TextView)view.findViewById(R.id.tv_ad_name);
             tv_ad_type = (TextView)view.findViewById(R.id.tv_ad_type);
             tv_ad_description = (TextView)view.findViewById(R.id.tv_ad_description);
-        }
 
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(final View view) {
+                    final int pos=getLayoutPosition();
+                    final CharSequence[] items = {"View", "Edit", "Delete"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
-            }
+                    builder.setTitle(hostelListData.get(pos).getName());
+                    builder.setItems(items, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int item) {
+                            switch (item)
+                            {
+                                case 0:
+                                    view.getContext().startActivity(new Intent(view.getContext(),ViewHostelActivity.class)
+                                            .putExtra("hostelid",hostelListData.get(pos).getId()));
+                                    break;
+                                case 1:
+                                    break;
+                                case 2:
+                                    break;
+                            }
+                        }
+                    });
+                    builder.show();
+                    return true;
+                }
+            });
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos=getLayoutPosition();
+                    System.out.println("Click: "+hostelListData.get(pos).getId());
+                }
+            });
         }
     }
 

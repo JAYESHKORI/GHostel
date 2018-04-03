@@ -36,6 +36,8 @@
         <activity android:name=".Activity.RectorActivity" />
         <activity android:name=".Activity.ContractorActivity" />
         <activity android:name=".Activity.ShowQRCodeActivity" />
+        <activity android:name=".Activity.ViewHostelActivity" />
+        <activity android:name=".Activity.ViewBlockActivity"></activity>
     </application>
 
 </manifest>
