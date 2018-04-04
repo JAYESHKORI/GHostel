@@ -44,4 +44,5 @@ public class Const
     public static final String API_SAVEQR = "inst_code.php";
     public static final String API_VALIDATEQR = "validateCode.php";
     public static final String API_VIEWHOSTEL = "viewHostel.php";
+    public static final String API_VIEWBLOCK = "viewBlock.php";
 }
