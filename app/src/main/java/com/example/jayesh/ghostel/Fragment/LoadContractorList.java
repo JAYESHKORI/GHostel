@@ -19,10 +19,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jayesh.ghostel.Activity.AddNewContractor;
-import com.example.jayesh.ghostel.Activity.AddNewRector;
-import com.example.jayesh.ghostel.Adapter.CommonAdapter;
+import com.example.jayesh.ghostel.Adapter.ContractorListAdapter;
 import com.example.jayesh.ghostel.Model.CommonData;
-import com.example.jayesh.ghostel.Model.HostelListData;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.Utils.Const;
 
@@ -120,7 +118,7 @@ public class LoadContractorList extends Fragment
                                 );
                                 commonDataArrayList.add(commonData);
                             }
-                            commonAdapter = new CommonAdapter(getContext(),commonDataArrayList);
+                            commonAdapter = new ContractorListAdapter(getContext(),commonDataArrayList);
                             rv_contractorList.setAdapter(commonAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();

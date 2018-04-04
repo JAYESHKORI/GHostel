@@ -181,7 +181,8 @@ public class AddNewStudent extends AppCompatActivity {
                                 JSONObject jsonObject = new JSONObject(response);
                                 response = jsonObject.getString("response");
                                 Toast.makeText(AddNewStudent.this,response,Toast.LENGTH_LONG).show();
-                                iv_dp.setImageResource(0);
+                                startActivity(new Intent(AddNewStudent.this,AdminActivity.class));
+                                finish();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -258,6 +259,7 @@ public class AddNewStudent extends AppCompatActivity {
             Uri path = data.getData();
             String realPath = RealPathUtil.getRealPathFromURI_API19(this, data.getData());
             extension =  realPath.substring(realPath.lastIndexOf("."));
+            Log.d("extension",extension);
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),path);
                 iv_dp.setImageBitmap(bitmap);
@@ -270,7 +272,7 @@ public class AddNewStudent extends AppCompatActivity {
     private String imageToString(Bitmap bitmap)
     {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes,Base64.DEFAULT);
     }

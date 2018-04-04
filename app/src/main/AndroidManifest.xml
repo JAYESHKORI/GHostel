@@ -37,7 +37,11 @@
         <activity android:name=".Activity.ContractorActivity" />
         <activity android:name=".Activity.ShowQRCodeActivity" />
         <activity android:name=".Activity.ViewHostelActivity" />
-        <activity android:name=".Activity.ViewBlockActivity"></activity>
+        <activity android:name=".Activity.ViewBlockActivity" />
+        <activity android:name=".Activity.ViewCommonDataActivity" />
+        <activity android:name=".Activity.ViewStudentActivity" />
+        <activity android:name=".Activity.ViewRectorActivity" />
+        <activity android:name=".Activity.ViewContractorActivity"></activity>
     </application>
 
 </manifest>

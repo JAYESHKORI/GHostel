@@ -19,7 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jayesh.ghostel.Activity.AddNewStudent;
-import com.example.jayesh.ghostel.Adapter.CommonAdapter;
+import com.example.jayesh.ghostel.Adapter.StudentListAdapter;
 import com.example.jayesh.ghostel.Model.CommonData;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.Utils.Const;
@@ -118,7 +118,7 @@ public class LoadStudentList extends Fragment
                                 );
                                 commonDataArrayList.add(commonData);
                             }
-                            commonAdapter = new CommonAdapter(getContext(),commonDataArrayList);
+                            commonAdapter = new StudentListAdapter(getContext(),commonDataArrayList);
                             rv_studentList.setAdapter(commonAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();

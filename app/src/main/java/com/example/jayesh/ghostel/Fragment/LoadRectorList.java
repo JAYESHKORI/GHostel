@@ -19,9 +19,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jayesh.ghostel.Activity.AddNewRector;
-import com.example.jayesh.ghostel.Adapter.CommonAdapter;
+import com.example.jayesh.ghostel.Adapter.RectorListAdapter;
 import com.example.jayesh.ghostel.Model.CommonData;
-import com.example.jayesh.ghostel.Model.RectorListData;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.Utils.Const;
 
@@ -120,7 +119,7 @@ public class LoadRectorList extends Fragment
                                 commonDataArrayList.add(commonData);
                                 Log.d("al",commonDataArrayList.toString());
                             }
-                            commonAdapter = new CommonAdapter(getContext(),commonDataArrayList);
+                            commonAdapter = new RectorListAdapter(getContext(),commonDataArrayList);
                             rv_rectorList.setAdapter(commonAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
