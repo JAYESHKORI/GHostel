@@ -7,36 +7,27 @@
         <item
             android:id="@+id/nav_hostel"
             android:icon="@drawable/ic_menu_camera"
-            android:title="HOSTELS" />
+            android:title="Hostels" />
         <item
             android:id="@+id/nav_blocks"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="BLOCKS" />
+            android:title="Blocks" />
         <item
             android:id="@+id/nav_rectors"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="RECTORS" />
+            android:title="Rectors" />
         <item
             android:id="@+id/nav_mess"
             android:icon="@drawable/ic_menu_manage"
-            android:title="MESS CONTRACTORS" />
+            android:title="Mess Contractors" />
         <item
             android:id="@+id/nav_student"
             android:icon="@drawable/ic_menu_manage"
-            android:title="STUDENTS" />
+            android:title="Students" />
+        <item
+            android:id="@+id/nav_complains"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Complains" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
 
 </menu>

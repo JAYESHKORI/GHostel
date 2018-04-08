@@ -32,6 +32,9 @@ public class Const
     public static final String API_URL = "http://192.168.43.31/ghostel/";
     public static final String API_HOSTELLIST = "hostellist.php";
     public static final String API_BLOCKLIST = "blocklist.php";
+    public static final String API_ROOMLIST = "roomlist.php";
+    public static final String API_GETBLOCKS = "getblocks.php";
+    public static final String API_GETROOMS = "getrooms.php";
     public static final String API_ADDNEWBLOCK = "inst_block.php";
     public static final String API_ADDNEWHOSTEL = "inst_hostel.php";
     public static final String API_ADDNEWRECTOR = "inst_rector.php";
@@ -48,4 +51,10 @@ public class Const
     public static final String API_VIEWSTUDENT = "viewStudent.php";
     public static final String API_VIEWRECTOR = "viewRector.php";
     public static final String API_VIEWCONTRACTOR = "viewContractor.php";
+    public static final String API_EDITSTUDENT = "editStudent.php";
+    public static final String API_EDITRECTOR = "editRector.php";
+    public static final String API_EDITCONTRACTOR = "editContractor.php";
+    public static final String API_EDITHOSTEL = "editHostel.php";
+    public static final String API_EDITBLOCK = "editBlock.php";
+    public static final String API_REGCOMPLAIN = "addComplain.php";
 }

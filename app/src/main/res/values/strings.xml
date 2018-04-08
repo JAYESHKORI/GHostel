@@ -15,4 +15,5 @@
         <item>MESS CONTRACTOR</item>
         <item>ADMIN</item>
     </string-array>
+    <string name="title_activity_student">StudentActivity</string>
 </resources>

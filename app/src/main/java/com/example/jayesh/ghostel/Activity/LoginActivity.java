@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private int id = 0;
     private String usertype = "X";
+    private String imgURL = "";
 
     private Session session;
     @Override
@@ -96,6 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 JSONArray jsonArray = new JSONArray(response);
                                 id = jsonArray.getJSONObject(0).getInt("id");
                                 usertype = jsonArray.getJSONObject(0).getString("usertype");
+                                imgURL = jsonArray.getJSONObject(0).getString("imgURL");
 
                                 if(id>0)
                                 {
@@ -105,6 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             session.setid(id);
                                             session.setUsername(email);
                                             session.setUsertype("A");
+                                            session.setImgURL(imgURL);
                                             startActivity(new Intent(LoginActivity.this,AdminActivity.class));
                                             finish();
                                             break;
@@ -112,6 +115,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             session.setid(id);
                                             session.setUsername(email);
                                             session.setUsertype("S");
+                                            session.setImgURL(imgURL);
                                             startActivity(new Intent(LoginActivity.this,StudentActivity.class));
                                             finish();
                                             break;
@@ -119,6 +123,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             session.setid(id);
                                             session.setUsername(email);
                                             session.setUsertype("R");
+                                            session.setImgURL(imgURL);
                                             startActivity(new Intent(LoginActivity.this,RectorActivity.class));
                                             finish();
                                             break;
@@ -126,6 +131,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             session.setid(id);
                                             session.setUsername(email);
                                             session.setUsertype("C");
+                                            session.setImgURL(imgURL);
                                             startActivity(new Intent(LoginActivity.this,ContractorActivity.class));
                                             finish();
                                             break;

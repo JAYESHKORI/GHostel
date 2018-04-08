@@ -1,60 +1,108 @@
 package com.example.jayesh.ghostel.Activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.example.jayesh.ghostel.Fragment.GenerateQR;
+import com.example.jayesh.ghostel.Fragment.LoadBlockList;
+import com.example.jayesh.ghostel.Fragment.LoadContractorList;
+import com.example.jayesh.ghostel.Fragment.LoadHostelList;
+import com.example.jayesh.ghostel.Fragment.LoadRectorList;
+import com.example.jayesh.ghostel.Fragment.LoadStudentList;
+import com.example.jayesh.ghostel.Fragment.RaiseComplain;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.SharedPrefrences.Session;
 import com.example.jayesh.ghostel.Utils.Const;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+public class StudentActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-public class StudentActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button btn_breakfast,btn_lunch,btn_dinner;
-    private TextView tv_contact_contractor;
     private Session session;
-
-    public static Bitmap bitmap;
+    private ImageView iv_dp;
+    private TextView tv_username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
-
         session = new Session(StudentActivity.this);
 
-        btn_breakfast = (Button)findViewById(R.id.btn_breakfast);
-        btn_breakfast.setOnClickListener(this);
-        btn_lunch = (Button)findViewById(R.id.btn_lunch);
-        btn_lunch.setOnClickListener(this);
-        btn_dinner = (Button)findViewById(R.id.btn_dinner);
-        btn_dinner.setOnClickListener(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        View hView =  navigationView.getHeaderView(0);
+        tv_username = (TextView)hView.findViewById(R.id.tv_username);
+        iv_dp = (ImageView) hView.findViewById(R.id.iv_dp);
+
+        tv_username.setText(session.getUsername());
+        Glide.with(StudentActivity.this).load(Const.API_URL+session.getImgURL()).into(iv_dp);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        Fragment fragment =null;
+
+        if (id == R.id.nav_generate_qr) {
+            fragment = new GenerateQR();
+        } else if (id == R.id.nav_raise_complain) {
+            fragment = new RaiseComplain();
+        } else if (id == R.id.nav_request) {
+            fragment = new LoadRectorList();
+        }
+        if (fragment!=null)
+        {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.screen_area,fragment);
+            fragmentTransaction.commit();
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_option,menu);
+        getMenuInflater().inflate(R.menu.student,menu);
         return true;
     }
 
@@ -69,82 +117,11 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
                 session.setid(0);
                 session.setUsername("");
                 session.setUsertype("X");
+                session.setImgURL("X");
                 startActivity(new Intent(StudentActivity.this,MainActivity.class));
                 finish();
                 break;
         }
         return true;
-    }
-
-    @Override
-    public void onClick(View view) {
-        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-        String time = new SimpleDateFormat("HH").format(new Date());
-        String qr = "";
-        String title = "";
-        switch (view.getId()) {
-            case R.id.btn_breakfast:
-                if (Integer.parseInt(time) < 7) {
-                    qr = date + session.getid() + session.getUsername() + "B";
-                    title = "Breakfast";
-                    saveQR(qr,title);
-                } else
-                    Toast.makeText(StudentActivity.this, "Contact Your Mess Contractor", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.btn_lunch:
-                if (Integer.parseInt(time) < 9) {
-                    qr = date + session.getid() + session.getUsername() + "L";
-                    title = "Lunch";
-                    saveQR(qr,title);
-                } else
-                    Toast.makeText(StudentActivity.this, "Contact Your Mess Contractor", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.btn_dinner: {
-                if (Integer.parseInt(time) < 18) {
-                    qr = date + session.getid() + session.getUsername() + "D";
-                    title = "Dinner";
-                    saveQR(qr,title);
-                } else
-                    Toast.makeText(StudentActivity.this, "Contact Your Mess Contractor", Toast.LENGTH_SHORT).show();
-                break;
-            }
-        }
-    }
-
-    private void saveQR(final String qr, final String title)
-    {
-        final ProgressDialog progressDialog = new ProgressDialog(StudentActivity.this);
-        progressDialog.setMessage("Generating QR..");
-        progressDialog.show();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
-                + Const.API_SAVEQR,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        progressDialog.dismiss();
-                        startActivity(new Intent(StudentActivity.this, ShowQRCodeActivity.class).putExtra("title", title)
-                                .putExtra("value", qr));
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressDialog.dismiss();
-                        Log.e("Error",error.toString());
-                    }
-                }
-        ){
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("code",qr);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(StudentActivity.this);
-        requestQueue.add(stringRequest);
-
     }
 }

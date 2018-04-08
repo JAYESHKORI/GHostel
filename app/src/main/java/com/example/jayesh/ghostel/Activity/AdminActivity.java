@@ -13,7 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.jayesh.ghostel.Fragment.LoadBlockList;
 import com.example.jayesh.ghostel.Fragment.LoadContractorList;
 import com.example.jayesh.ghostel.Fragment.LoadHostelList;
@@ -21,12 +25,14 @@ import com.example.jayesh.ghostel.Fragment.LoadRectorList;
 import com.example.jayesh.ghostel.Fragment.LoadStudentList;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.SharedPrefrences.Session;
+import com.example.jayesh.ghostel.Utils.Const;
 
 public class AdminActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Session session;
-
+    private ImageView iv_dp;
+    private TextView tv_username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +49,12 @@ public class AdminActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View hView =  navigationView.getHeaderView(0);
+        tv_username = (TextView)hView.findViewById(R.id.tv_username);
+        iv_dp = (ImageView) hView.findViewById(R.id.iv_dp);
+
+        tv_username.setText(session.getUsername());
+        Glide.with(AdminActivity.this).load(Const.API_URL+session.getImgURL()).into(iv_dp);
     }
 
     @Override
@@ -91,7 +103,7 @@ public class AdminActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_option,menu);
+        getMenuInflater().inflate(R.menu.admin,menu);
         return true;
     }
 
@@ -106,6 +118,7 @@ public class AdminActivity extends AppCompatActivity
                 session.setid(0);
                 session.setUsername("");
                 session.setUsertype("X");
+                session.setImgURL("X");
                 startActivity(new Intent(AdminActivity.this,MainActivity.class));
                 finish();
                 break;

@@ -12,7 +12,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-import static com.example.jayesh.ghostel.Activity.StudentActivity.bitmap;
+import static com.example.jayesh.ghostel.Fragment.GenerateQR.bitmap;
+
 
 public class ShowQRCodeActivity extends AppCompatActivity {
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.jayesh.ghostel.Activity.EditBlockActivity;
 import com.example.jayesh.ghostel.Activity.ViewBlockActivity;
 import com.example.jayesh.ghostel.Activity.ViewHostelActivity;
 import com.example.jayesh.ghostel.Model.BlockListData;
@@ -59,6 +60,12 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.MyVi
                                             .putExtra("blockid",blockListData.get(pos).getBlockid()));
                                     break;
                                 case 1:
+                                    Intent intent = new Intent(view.getContext(), EditBlockActivity.class);
+                                    intent.putExtra("blockid", blockListData.get(pos).getBlockid());
+                                    intent.putExtra("blockname", blockListData.get(pos).getBname());
+                                    intent.putExtra("capacity", blockListData.get(pos).getCapacity());
+                                    intent.putExtra("type", blockListData.get(pos).getType());
+                                    view.getContext().startActivity(intent);
                                     break;
                                 case 2:
                                     break;

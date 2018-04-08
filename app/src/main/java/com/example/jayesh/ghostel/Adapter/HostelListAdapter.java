@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.jayesh.ghostel.Activity.EditHostelActivity;
 import com.example.jayesh.ghostel.Activity.ViewHostelActivity;
 import com.example.jayesh.ghostel.Model.HostelListData;
 import com.example.jayesh.ghostel.R;
@@ -62,6 +63,12 @@ public class HostelListAdapter extends RecyclerView.Adapter<HostelListAdapter.My
                                             .putExtra("hostelid",hostelListData.get(pos).getId()));
                                     break;
                                 case 1:
+                                    Intent intent = new Intent(view.getContext(), EditHostelActivity.class);
+                                    intent.putExtra("hostelid", hostelListData.get(pos).getId());
+                                    intent.putExtra("hostelname", hostelListData.get(pos).getName());
+                                    intent.putExtra("description", hostelListData.get(pos).getDescription());
+                                    intent.putExtra("type", hostelListData.get(pos).getType());
+                                    view.getContext().startActivity(intent);
                                     break;
                                 case 2:
                                     break;

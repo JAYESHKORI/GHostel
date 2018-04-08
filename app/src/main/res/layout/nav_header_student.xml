@@ -14,15 +14,18 @@
 
     <ImageView
         android:id="@+id/iv_dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="150dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:scaleType="fitCenter"
         app:srcCompat="@mipmap/ic_launcher_round" />
+
 
     <TextView
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="android.studio@android.com" />
+        android:text="android.studio@android.com"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

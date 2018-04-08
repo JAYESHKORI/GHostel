@@ -2,11 +2,13 @@ package com.example.jayesh.ghostel.Activity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -48,7 +50,7 @@ public class AddNewStudent extends AppCompatActivity {
     private EditText et_enroll,et_fname,et_lname,et_mname,et_email,et_contact,et_address,et_parentcontact,et_em_contact,et_college;
     private TextView tv_dob;
     private Button btn_add;
-    private Spinner spn_hostel,spn_block;
+    private Spinner spn_hostel,spn_block,spn_room;
     private ImageView iv_dp;
 
     private ArrayList<Integer> hostelListIdAL;
@@ -58,6 +60,12 @@ public class AddNewStudent extends AppCompatActivity {
     private ArrayList<Integer> blockListIdAL;
     private ArrayList<String> blockListNameAL;
     private ArrayAdapter<String> blockListDataAA;
+
+    private ArrayList<Integer> roomListIdAL;
+    private ArrayList<String> roomListNoAL;
+    private ArrayList<Integer> roomListCapacityAL;
+    private ArrayList<Integer> roomListCurrentNoAL;
+    private ArrayAdapter<String> roomListDataAA;
 
     private Bitmap bitmap;
 
@@ -108,11 +116,56 @@ public class AddNewStudent extends AppCompatActivity {
             }
         });
         spn_block = (Spinner)findViewById(R.id.addSt_spn_block);
+        spn_block.setVisibility(View.GONE);
+        spn_block.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                load_roomList(blockListIdAL.get(i));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spn_room = (Spinner)findViewById(R.id.addSt_spn_room);
+        spn_room.setVisibility(View.GONE);
         btn_add = (Button)findViewById(R.id.addSt_btn_add);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addStudent();
+                if (roomListIdAL.size()==0||blockListIdAL.size()==0)
+                {
+                    showmessage("Error!","No rooms available. Please select different block or hostel");
+                }
+                else
+                {
+                    int cap = roomListCapacityAL.get(spn_room.getSelectedItemPosition());
+                    int curno = roomListCurrentNoAL.get(spn_room.getSelectedItemPosition());
+                    if(cap>curno)
+                        addStudent();
+                    else
+                    {
+                        AlertDialog alertDialog = new AlertDialog.Builder(AddNewStudent.this).create();
+                        alertDialog.setTitle("Warning");
+                        alertDialog.setMessage("There isn't space. Do you still want to proceed?");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                addStudent();
+                            }
+                        });
+                        alertDialog.show();
+                    }
+                }
+
+
             }
         });
 
@@ -120,6 +173,10 @@ public class AddNewStudent extends AppCompatActivity {
         hostelListNameAL = new ArrayList<>();
         blockListIdAL = new ArrayList<>();
         blockListNameAL = new ArrayList<>();
+        roomListIdAL = new ArrayList<>();
+        roomListNoAL = new ArrayList<>();
+        roomListCapacityAL = new ArrayList<>();
+        roomListCurrentNoAL = new ArrayList<>();
 
         load_hostelList();
     }
@@ -168,6 +225,7 @@ public class AddNewStudent extends AppCompatActivity {
             Log.e("college",et_college.getText().toString());
             Log.e("Hostel Id",String.valueOf(hostelListIdAL.get(spn_hostel.getSelectedItemPosition())));
             Log.e("Block Id",String.valueOf(blockListIdAL.get(spn_block.getSelectedItemPosition())));
+            Log.e("Room Id",String.valueOf(roomListIdAL.get(spn_room.getSelectedItemPosition())));
             Log.e("dp",imageToString(bitmap));
             Log.e("extension",extension);
 
@@ -213,6 +271,7 @@ public class AddNewStudent extends AppCompatActivity {
                     params.put("college",et_college.getText().toString());
                     params.put("hostelid",String.valueOf(hostelListIdAL.get(spn_hostel.getSelectedItemPosition())));
                     params.put("blockid",String.valueOf(blockListIdAL.get(spn_block.getSelectedItemPosition())));
+                    params.put("roomid",String.valueOf(roomListIdAL.get(spn_room.getSelectedItemPosition())));
                     params.put("password",tv_dob.getText().toString());
                     params.put("dp",imageToString(bitmap));
                     params.put("extension",extension);
@@ -222,32 +281,6 @@ public class AddNewStudent extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(AddNewStudent.this);
             requestQueue.add(stringRequest);
         }
-    }
-
-    private void getDob()
-    {
-        Calendar c = Calendar.getInstance();
-        int  mYear = c.get(Calendar.YEAR);
-        int mMonth = c.get(Calendar.MONTH);
-        int mDay = c.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(AddNewStudent.this,
-                new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        tv_dob.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                    }
-                }, mYear, mMonth, mDay);
-        datePickerDialog.show();
-    }
-
-    private  void selectImage()
-    {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,IMG_REQUEST);
     }
 
     @Override
@@ -269,14 +302,6 @@ public class AddNewStudent extends AppCompatActivity {
         }
     }
 
-    private String imageToString(Bitmap bitmap)
-    {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        byte[] imgBytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(imgBytes,Base64.DEFAULT);
-    }
-
     private void load_hostelList()
     {
         final ProgressDialog progressDialog = new ProgressDialog(AddNewStudent.this);
@@ -289,7 +314,7 @@ public class AddNewStudent extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
-                        Log.e("response",response);
+                        Log.e("hostel list",response);
 
                         try {
                             JSONArray jsonArray = new JSONArray(response);
@@ -322,35 +347,106 @@ public class AddNewStudent extends AppCompatActivity {
 
     private void load_blockList(final int hostelId)
     {
-        Log.d("hostelId ",String.valueOf(hostelId));
         final ProgressDialog progressDialog = new ProgressDialog(AddNewStudent.this);
-        progressDialog.setMessage("Loading Data...");
+        progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-        blockListIdAL.clear();
-        blockListNameAL.clear();
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Const.API_URL
-                + Const.API_BLOCKLIST,
+        blockListIdAL.clear();blockListNameAL.clear();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
+                + Const.API_GETBLOCKS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        progressDialog.dismiss();
-                        Log.e("response",response);
+                        Log.d("block list",response);
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             for (int j=0;j<jsonArray.length();j++)
                             {
-                                if (jsonArray.getJSONObject(j).getInt("hostelid")==hostelId)
-                                {
-                                    blockListIdAL.add(jsonArray.getJSONObject(j).getInt("blockid"));
-                                    blockListNameAL.add(jsonArray.getJSONObject(j).getString("bname"));
-                                }
+                                blockListIdAL.add(jsonArray.getJSONObject(j).getInt("blockid"));
+                                blockListNameAL.add(jsonArray.getJSONObject(j).getString("bname"));
                             }
-                            blockListDataAA = new ArrayAdapter<String>(
-                                    AddNewStudent.this,
-                                    android.R.layout.simple_spinner_item,
-                                    blockListNameAL);
-                            spn_block.setAdapter(blockListDataAA);
+                            if (blockListIdAL.size()==0)
+                            {
+                                spn_block.setVisibility(View.GONE);
+                                spn_room.setVisibility(View.GONE);
+                                showmessage("Error!","There isn't any block inside this hostel " +
+                                        "Either create new block or select differet hostel");
+                            }
+                            else
+                            {
+                                blockListDataAA = new ArrayAdapter<String>(
+                                        AddNewStudent.this,
+                                        android.R.layout.simple_spinner_item,
+                                        blockListNameAL);
+                                spn_block.setAdapter(blockListDataAA);
+                                spn_block.setVisibility(View.VISIBLE);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Log.e("Error",error.toString());
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("hostelid",String.valueOf(hostelId));
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(AddNewStudent.this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void load_roomList(final int blockid)
+    {
+        Log.d("blockid ",String.valueOf(blockid));
+        final ProgressDialog progressDialog = new ProgressDialog(AddNewStudent.this);
+        progressDialog.setMessage("Loading Data...");
+        progressDialog.show();
+
+        roomListIdAL.clear();roomListNoAL.clear();roomListCapacityAL.clear();roomListCurrentNoAL.clear();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
+                + Const.API_GETROOMS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        Log.e("room list",response);
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int j=0;j<jsonArray.length();j++)
+                            {
+                                roomListIdAL.add(jsonArray.getJSONObject(j).getInt("roomid"));
+                                roomListNoAL.add(jsonArray.getJSONObject(j).getString("roomno"));
+                                roomListCapacityAL.add(jsonArray.getJSONObject(j).getInt("capacity"));
+                                roomListCurrentNoAL.add(jsonArray.getJSONObject(j).getInt("current_no"));
+                            }
+                            if (roomListIdAL.size()==0)
+                            {
+                                spn_room.setVisibility(View.GONE);
+                                showmessage("Error!","There isn't any room inside this block. " +
+                                        "Either create new block or select differet hostel");
+                            }
+                            else
+                            {
+                                roomListDataAA = new ArrayAdapter<String>(
+                                        AddNewStudent.this,
+                                        android.R.layout.simple_spinner_item,
+                                        roomListNoAL);
+                                spn_room.setAdapter(roomListDataAA);
+                                spn_room.setVisibility(View.VISIBLE);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -363,9 +459,65 @@ public class AddNewStudent extends AppCompatActivity {
                         Log.e("Error",error.toString());
                     }
                 }
-        );
+        ){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("blockid",String.valueOf(blockid));
+                return params;
+            }
+        };
         RequestQueue requestQueue = Volley.newRequestQueue(AddNewStudent.this);
         requestQueue.add(stringRequest);
+    }
+
+    private void getDob()
+    {
+        Calendar c = Calendar.getInstance();
+        int  mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(AddNewStudent.this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        tv_dob.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
+    private  void selectImage()
+    {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,IMG_REQUEST);
+    }
+
+    private String imageToString(Bitmap bitmap)
+    {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imgBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgBytes,Base64.DEFAULT);
+    }
+
+    private void showmessage(String title, String msg)
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(AddNewStudent.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }
 

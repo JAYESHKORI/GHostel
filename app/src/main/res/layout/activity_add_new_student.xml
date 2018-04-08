@@ -133,6 +133,13 @@ tools:context="com.example.jayesh.ghostel.Activity.AddNewStudent">
             android:layout_margin="20dp">
         </android.support.v7.widget.AppCompatSpinner>
 
+        <android.support.v7.widget.AppCompatSpinner
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/addSt_spn_room"
+            android:layout_margin="20dp">
+        </android.support.v7.widget.AppCompatSpinner>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

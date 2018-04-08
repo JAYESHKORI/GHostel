@@ -32,7 +32,6 @@
         <activity android:name=".Activity.AddNewRector" />
         <activity android:name=".Activity.AddNewContractor" />
         <activity android:name=".Activity.AddNewStudent" />
-        <activity android:name=".Activity.StudentActivity" />
         <activity android:name=".Activity.RectorActivity" />
         <activity android:name=".Activity.ContractorActivity" />
         <activity android:name=".Activity.ShowQRCodeActivity" />
@@ -41,7 +40,16 @@
         <activity android:name=".Activity.ViewCommonDataActivity" />
         <activity android:name=".Activity.ViewStudentActivity" />
         <activity android:name=".Activity.ViewRectorActivity" />
-        <activity android:name=".Activity.ViewContractorActivity"></activity>
+        <activity android:name=".Activity.ViewContractorActivity" />
+        <activity android:name=".Activity.EditStudentActivity" />
+        <activity android:name=".Activity.EditRectorActivity" />
+        <activity android:name=".Activity.EditContractorActivity" />
+        <activity android:name=".Activity.EditHostelActivity" />
+        <activity android:name=".Activity.EditBlockActivity" />
+        <activity
+            android:name=".Activity.StudentActivity"
+            android:label="@string/title_activity_student"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
