@@ -19,9 +19,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.jayesh.ghostel.Activity.AddNewBlock;
-import com.example.jayesh.ghostel.Adapter.BlockListAdapter;
-import com.example.jayesh.ghostel.Model.BlockListData;
+import com.example.jayesh.ghostel.Activity.AddNewRoom;
+import com.example.jayesh.ghostel.Adapter.RoomListAdapter;
+import com.example.jayesh.ghostel.Model.RoomListData;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.Utils.Const;
 
@@ -31,35 +31,27 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 /**
- * Created by jayesh on 19/2/18.
+ * Created by jayesh on 8/4/18.
  */
 
-public class LoadBlockList extends Fragment
+public class LoadRoomList extends Fragment
 {
-    private static final String ARG_PARAM3 = "param3";
-    private static final String ARG_PARAM4 = "param4";
-
     private RecyclerView rv_block_list;
-    private RecyclerView.Adapter blockListAdapter;
-    private ArrayList<BlockListData> blockListDataArrayList;
+    private RecyclerView.Adapter roomListAdapter;
+    private ArrayList<RoomListData> roomListDataArrayList;
     private View view;
     private FloatingActionButton fab_add_block;
 
     private TextView tv_msg;
     private String TAG = "HomeFragment";
 
-    private String mParam3;
-    private String mParam4;
-
-    public LoadBlockList() {
+    public LoadRoomList() {
         // Required empty public constructor
     }
 
-    public static LoadBlockList newInstance(String param3, String param4) {
-        LoadBlockList fragment = new LoadBlockList();
+    public static LoadRoomList newInstance(String param3, String param4) {
+        LoadRoomList fragment = new LoadRoomList();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM3, param3);
-        args.putString(ARG_PARAM4, param4);
         fragment.setArguments(args);
         return fragment;
     }
@@ -67,10 +59,6 @@ public class LoadBlockList extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam3 = getArguments().getString(ARG_PARAM3);
-            mParam4 = getArguments().getString(ARG_PARAM4);
-        }
     }
 
     @Override
@@ -80,14 +68,14 @@ public class LoadBlockList extends Fragment
         view =  inflater.inflate(R.layout.frag_load_blocklist, container, false);
         rv_block_list = (RecyclerView)view.findViewById(R.id.rv_block_list);
         rv_block_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        blockListDataArrayList = new ArrayList<>();
+        roomListDataArrayList = new ArrayList<>();
         loadBlockListsData();
 
         fab_add_block = (FloatingActionButton) view.findViewById(R.id.fab_add_block);
         fab_add_block.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), AddNewBlock.class);
+                Intent i = new Intent(getContext(), AddNewRoom.class);
                 startActivity(i);
             }
         });
@@ -101,7 +89,7 @@ public class LoadBlockList extends Fragment
         progressDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Const.API_URL
-                + Const.API_BLOCKLIST,
+                + Const.API_ROOMLIST,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -111,18 +99,20 @@ public class LoadBlockList extends Fragment
                             JSONArray jsonArray = new JSONArray(response);
                             for (int j=0;j<jsonArray.length();j++)
                             {
-                                BlockListData blockListData = new BlockListData(
-                                        jsonArray.getJSONObject(j).getInt("blockid"),
-                                        jsonArray.getJSONObject(j).getString("bname"),
+                                RoomListData roomListData = new RoomListData(
+                                        jsonArray.getJSONObject(j).getInt("roomid"),
+                                        jsonArray.getJSONObject(j).getString("roomno"),
                                         jsonArray.getJSONObject(j).getInt("hostelid"),
-                                        jsonArray.getJSONObject(j).getString("hname"),
-                                        jsonArray.getJSONObject(j).getString("type"),
-                                        jsonArray.getJSONObject(j).getInt("capacity")
+                                        jsonArray.getJSONObject(j).getString("hostelname"),
+                                        jsonArray.getJSONObject(j).getInt("blockid"),
+                                        jsonArray.getJSONObject(j).getString("blockname"),
+                                        jsonArray.getJSONObject(j).getInt("capacity"),
+                                        jsonArray.getJSONObject(j).getInt("current_no")
                                 );
-                                blockListDataArrayList.add(blockListData);
+                                roomListDataArrayList.add(roomListData);
                             }
-                            blockListAdapter = new BlockListAdapter(getContext(),blockListDataArrayList);
-                            rv_block_list.setAdapter(blockListAdapter);
+                            roomListAdapter = new RoomListAdapter(getContext(),roomListDataArrayList);
+                            rv_block_list.setAdapter(roomListAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -140,3 +130,4 @@ public class LoadBlockList extends Fragment
         requestQueue.add(stringRequest);
     }
 }
+

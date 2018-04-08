@@ -39,6 +39,7 @@ public class Const
     public static final String API_GETBLOCKS = "getblocks.php";
     public static final String API_GETROOMS = "getrooms.php";
     public static final String API_ADDNEWBLOCK = "inst_block.php";
+    public static final String API_ADDNEWROOM = "inst_room.php";
     public static final String API_ADDNEWHOSTEL = "inst_hostel.php";
     public static final String API_ADDNEWRECTOR = "inst_rector.php";
     public static final String API_ADDNEWCONTRACTOR = "inst_contractor.php";
@@ -62,5 +63,6 @@ public class Const
     public static final String API_DELSTUDENT = "deleteStudent.php";
     public static final String API_DELRECTOR = "deleteRector.php";
     public static final String API_DELCONTRACTOR = "deleteContractor.php";
+    public static final String API_DELROOM = "deleteRoom.php";
     public static final String API_REGCOMPLAIN = "addComplain.php";
 }

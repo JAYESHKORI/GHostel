@@ -1,6 +1,7 @@
 package com.example.jayesh.ghostel.Adapter;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,13 +11,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.jayesh.ghostel.Activity.ViewBlockActivity;
 import com.example.jayesh.ghostel.Model.BlockListData;
 import com.example.jayesh.ghostel.Model.RoomListData;
 import com.example.jayesh.ghostel.R;
+import com.example.jayesh.ghostel.Utils.Const;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jayesh on 19/2/18.
@@ -47,7 +58,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.MyView
                 @Override
                 public boolean onLongClick(final View view) {
                     final int pos=getLayoutPosition();
-                    final CharSequence[] items = {"View", "Edit", "Delete"};
+                    final CharSequence[] items = { "Delete"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
                     builder.setTitle(roomListData.get(pos).getRoomno());
@@ -57,10 +68,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.MyView
                             switch (item)
                             {
                                 case 0:
-                                    break;
-                                case 1:
-                                    break;
-                                case 2:
+                                    showwarning("Warning!","Do you really want to delete this record permenantly?",roomListData.get(pos).getRoomid());
                                     break;
                             }
                         }
@@ -100,15 +108,70 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.MyView
         holder.tv_roomid.setText(String.valueOf(roomListData.get(position).getRoomid()));
         holder.tv_roomno.setText(roomListData.get(position).getRoomno());
         holder.tv_hostelid.setText(String.valueOf(roomListData.get(position).getHostelid()));
-        holder.tv_hostelname.setText(roomListData.get(position).getHostelname());
+        holder.tv_hostelname.setText("Hostel : "+roomListData.get(position).getHostelname());
         holder.tv_blockid.setText(String.valueOf(roomListData.get(position).getBlockid()));
-        holder.tv_blockname.setText(roomListData.get(position).getBlockname());
-        holder.tv_capacity.setText(String.valueOf(roomListData.get(position).getCapacity()));
-        holder.tv_current_no.setText(String.valueOf(roomListData.get(position).getCurrent_no()));
+        holder.tv_blockname.setText("Block : "+roomListData.get(position).getBlockname());
+        holder.tv_capacity.setText("Capacity : "+String.valueOf(roomListData.get(position).getCapacity()));
+        holder.tv_current_no.setText("Currently Living : "+String.valueOf(roomListData.get(position).getCurrent_no()));
     }
 
     @Override
     public int getItemCount() {
         return roomListData.size();
+    }
+
+    private void showwarning(String title, String msg, final int roomid)
+    {
+        android.support.v7.app.AlertDialog alertDialog = new android.support.v7.app.AlertDialog.Builder(caller).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_NEUTRAL, "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                deleteRoom(roomid);
+            }
+        });
+        alertDialog.show();
+    }
+
+    private void deleteRoom(final int roomid) {
+        final ProgressDialog progressDialog = new ProgressDialog(caller);
+        progressDialog.setMessage("Deleting...");
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
+                + Const.API_DELROOM,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("response",response);
+                        progressDialog.dismiss();
+                        Toast.makeText(caller,response,Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Log.e("Error",error.toString());
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("roomid",String.valueOf(roomid));
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(caller);
+        requestQueue.add(stringRequest);
     }
 }

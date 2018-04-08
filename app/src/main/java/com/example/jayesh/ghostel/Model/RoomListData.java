@@ -15,11 +15,13 @@ public class RoomListData
     private int capacity;
     private int current_no;
 
-    public RoomListData(int roomid, String roomno, int hostelid, int blockid, int capacity, int current_no) {
+    public RoomListData(int roomid, String roomno, int hostelid, String hostelname, int blockid, String blockname, int capacity, int current_no) {
         this.roomid = roomid;
         this.roomno = roomno;
         this.hostelid = hostelid;
+        this.hostelname = hostelname;
         this.blockid = blockid;
+        this.blockname = blockname;
         this.capacity = capacity;
         this.current_no = current_no;
     }

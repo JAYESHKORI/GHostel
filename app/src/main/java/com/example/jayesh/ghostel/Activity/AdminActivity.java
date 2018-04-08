@@ -22,6 +22,7 @@ import com.example.jayesh.ghostel.Fragment.LoadBlockList;
 import com.example.jayesh.ghostel.Fragment.LoadContractorList;
 import com.example.jayesh.ghostel.Fragment.LoadHostelList;
 import com.example.jayesh.ghostel.Fragment.LoadRectorList;
+import com.example.jayesh.ghostel.Fragment.LoadRoomList;
 import com.example.jayesh.ghostel.Fragment.LoadStudentList;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.SharedPrefrences.Session;
@@ -80,14 +81,14 @@ public class AdminActivity extends AppCompatActivity
             fragment = new LoadHostelList();
         } else if (id == R.id.nav_blocks) {
             fragment = new LoadBlockList();
-        } else if (id == R.id.nav_rectors) {
+        } else if (id == R.id.nav_rooms) {
+            fragment = new LoadRoomList();
+        }else if (id == R.id.nav_rectors) {
             fragment = new LoadRectorList();
         } else if (id == R.id.nav_mess) {
             fragment = new LoadContractorList();
         } else if (id == R.id.nav_student) {
             fragment = new LoadStudentList();
-        } else if (id == R.id.nav_send) {
-
         }
         if (fragment!=null)
         {

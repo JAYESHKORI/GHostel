@@ -6,24 +6,33 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_roomid"
+        android:id="@+id/tv_complainid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Room Id"
+        android:text="Complain Id"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/tv_roomno"
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="Room No"
+        android:text="Title"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textColor="@color/colorLochinvar"
         android:textSize="20dp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Details"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_hostelid"
@@ -59,27 +68,50 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
-            <TextView
-                android:id="@+id/tv_capacity"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="Capacity"
-                android:textSize="12dp"
-                android:layout_alignParentLeft="true"/>
+    <TextView
+        android:id="@+id/tv_roomid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Room Id"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"/>
 
-            <TextView
-                android:id="@+id/tv_current_no"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="Current No"
-                android:textSize="12dp"
-                android:layout_alignParentRight="true"/>
-        </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_roomno"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="Room no"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_studentid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Student id"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_studentname"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="Student name"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Status"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"/>
 
     <View
         android:layout_width="match_parent"
