@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.jayesh.ghostel.Activity.ViewStudentActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/ic_dp"
+                android:id="@+id/iv_sdp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enrollment No"
+                android:id="@+id/tv_enroll"
+                android:layout_margin="20dp"
+                android:inputType="number"
+                android:text="14012021016"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="First Name"
+                android:id="@+id/tv_fname"
+                android:layout_margin="20dp"
+                android:text="Ramanbhai"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last Name"
+                android:id="@+id/tv_lname"
+                android:layout_margin="20dp"
+                android:text="Chaganbhai"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Middle Name"
+                android:id="@+id/tv_mname"
+                android:layout_margin="20dp"
+                android:text="Desai"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Select Date"
+                android:id="@+id/tv_dob"
+                android:textSize="18dp"
+                android:layout_margin="20dp"
+                android:text="23-8-1998"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:id="@+id/tv_email"
+                android:layout_margin="20dp"
+                android:inputType="textEmailAddress"
+                android:text="Ramanbhai@gmail.com"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contact"
+                android:id="@+id/tv_contact"
+                android:layout_margin="20dp"
+                android:inputType="phone"
+                android:text="0987654321"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Permenant Address"
+                android:id="@+id/tv_address"
+                android:layout_margin="20dp"
+                android:minLines="2"
+                android:text="2,narol,ahmedabad"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Parent Contact"
+                android:id="@+id/tv_parentcontact"
+                android:layout_margin="20dp"
+                android:inputType="phone"
+                android:text="0987654321"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Emergency Contact"
+                android:id="@+id/tv_em_contact"
+                android:layout_margin="20dp"
+                android:inputType="phone"
+                android:text="0987654321"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="College"
+                android:id="@+id/tv_college"
+                android:layout_margin="20dp"
+                android:minLines="2"
+                android:text="U.V. Patel College of Engineering"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/tv_hostel"
+                android:layout_margin="20dp">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:id="@+id/tv_block"
+                android:layout_margin="20dp">
+            </TextView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

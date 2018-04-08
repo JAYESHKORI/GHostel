@@ -1,5 +1,8 @@
 package com.example.jayesh.ghostel.Utils;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+
 /**
  * Created by jayesh on 13/2/18.
  */
@@ -56,5 +59,8 @@ public class Const
     public static final String API_EDITCONTRACTOR = "editContractor.php";
     public static final String API_EDITHOSTEL = "editHostel.php";
     public static final String API_EDITBLOCK = "editBlock.php";
+    public static final String API_DELSTUDENT = "deleteStudent.php";
+    public static final String API_DELRECTOR = "deleteRector.php";
+    public static final String API_DELCONTRACTOR = "deleteContractor.php";
     public static final String API_REGCOMPLAIN = "addComplain.php";
 }
