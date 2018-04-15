@@ -31,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jayesh.ghostel.R;
+import com.example.jayesh.ghostel.SharedPrefrences.Session;
 import com.example.jayesh.ghostel.Utils.Const;
 import com.example.jayesh.ghostel.Utils.RealPathUtil;
 
@@ -45,7 +46,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddNewStudent extends AppCompatActivity {
+public class RectorAddStudent extends AppCompatActivity {
 
     private EditText et_enroll,et_fname,et_lname,et_mname,et_email,et_contact,et_address,et_parentcontact,et_em_contact,et_college;
     private TextView tv_dob;
@@ -53,32 +54,24 @@ public class AddNewStudent extends AppCompatActivity {
     private Spinner spn_hostel,spn_block,spn_room;
     private ImageView iv_dp;
 
-    private ArrayList<Integer> hostelListIdAL;
-    private ArrayList<String> hostelListNameAL;
-    private ArrayAdapter<String> hostelListDataAA;
-
-    private ArrayList<Integer> blockListIdAL;
-    private ArrayList<String> blockListNameAL;
-    private ArrayAdapter<String> blockListDataAA;
-
-    private ArrayList<Integer> roomListIdAL;
-    private ArrayList<String> roomListNoAL;
-    private ArrayList<Integer> roomListCapacityAL;
-    private ArrayList<Integer> roomListCurrentNoAL;
+    private ArrayList<Integer> roomListIdAL = new ArrayList<>();
+    private ArrayList<String> roomListNoAL = new ArrayList<>();
+    private ArrayList<Integer> roomListCapacityAL = new ArrayList<>();
+    private ArrayList<Integer> roomListCurrentNoAL = new ArrayList<>();
     private ArrayAdapter<String> roomListDataAA;
 
     private Bitmap bitmap;
-
+    private String extension=".png";
     private final int IMG_REQUEST = 1;
 
-    private String extension=".png";
+    private Session session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_student);
+        setContentView(R.layout.activity_rector_add_student);
+        session = new Session(RectorAddStudent.this);
 
-        bitmap = BitmapFactory.decodeResource(AddNewStudent.this.getResources(), R.mipmap.ic_dp);
-
+        bitmap = BitmapFactory.decodeResource(RectorAddStudent.this.getResources(), R.mipmap.ic_dp);
         et_enroll = (EditText)findViewById(R.id.addSt_et_entoll);
         et_fname = (EditText)findViewById(R.id.addSt_et_fname);
         et_lname = (EditText)findViewById(R.id.addSt_et_lname);
@@ -103,38 +96,15 @@ public class AddNewStudent extends AppCompatActivity {
                 selectImage();
             }
         });
-        spn_hostel = (Spinner)findViewById(R.id.addSt_spn_hostel);
-        spn_hostel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                load_blockList(hostelListIdAL.get(i));
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        spn_block = (Spinner)findViewById(R.id.addSt_spn_block);
-        spn_block.setVisibility(View.GONE);
-        spn_block.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                load_roomList(blockListIdAL.get(i));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         spn_room = (Spinner)findViewById(R.id.addSt_spn_room);
         spn_room.setVisibility(View.GONE);
         btn_add = (Button)findViewById(R.id.addSt_btn_add);
+
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (roomListIdAL.size()==0||blockListIdAL.size()==0)
+                if (roomListIdAL.size()==0)
                 {
                     showmessage("Error!","No rooms available. Please select different block or hostel");
                 }
@@ -146,7 +116,7 @@ public class AddNewStudent extends AppCompatActivity {
                         addStudent();
                     else
                     {
-                        AlertDialog alertDialog = new AlertDialog.Builder(AddNewStudent.this).create();
+                        AlertDialog alertDialog = new AlertDialog.Builder(RectorAddStudent.this).create();
                         alertDialog.setTitle("Warning");
                         alertDialog.setMessage("There isn't space. Do you still want to proceed?");
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "No",
@@ -168,47 +138,37 @@ public class AddNewStudent extends AppCompatActivity {
 
             }
         });
-
-        hostelListIdAL = new ArrayList<>();
-        hostelListNameAL = new ArrayList<>();
-        blockListIdAL = new ArrayList<>();
-        blockListNameAL = new ArrayList<>();
-        roomListIdAL = new ArrayList<>();
-        roomListNoAL = new ArrayList<>();
-        roomListCapacityAL = new ArrayList<>();
-        roomListCurrentNoAL = new ArrayList<>();
-
-        load_hostelList();
+        load_roomList(session.getblockid());
     }
 
     private void addStudent()
     {
         if(et_enroll.getText().toString().equals(""))
-            Toast.makeText(AddNewStudent.this,"Enrollment No. Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RectorAddStudent.this,"Enrollment No. Required",Toast.LENGTH_SHORT).show();
         else if(et_fname.getText().toString().equals(""))
-            Toast.makeText(AddNewStudent.this,"First name Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RectorAddStudent.this,"First name Required",Toast.LENGTH_SHORT).show();
         else if(et_lname.getText().toString().equals(""))
-            Toast.makeText(AddNewStudent.this,"Last name Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RectorAddStudent.this,"Last name Required",Toast.LENGTH_SHORT).show();
         else if(et_mname.getText().toString().equals(""))
-            Toast.makeText(AddNewStudent.this,"Middle name Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RectorAddStudent.this,"Middle name Required",Toast.LENGTH_SHORT).show();
         else if(tv_dob.getText().toString().equals(""))
-            Toast.makeText(AddNewStudent.this,"Date of Birth Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RectorAddStudent.this,"Date of Birth Required",Toast.LENGTH_SHORT).show();
         else if(et_email.getText().toString().equals(""))
-            Toast.makeText(AddNewStudent.this,"Email Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RectorAddStudent.this,"Email Required",Toast.LENGTH_SHORT).show();
         else if(et_contact.getText().toString().equals("")||et_contact.getText().toString().length()!=10)
-            Toast.makeText(AddNewStudent.this,"Contact Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RectorAddStudent.this,"Contact Required",Toast.LENGTH_SHORT).show();
         else if(et_address.getText().toString().equals(""))
-            Toast.makeText(AddNewStudent.this,"Address Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RectorAddStudent.this,"Address Required",Toast.LENGTH_SHORT).show();
         else if(et_parentcontact.getText().toString().equals("")||et_parentcontact.getText().toString().length()!=10)
-            Toast.makeText(AddNewStudent.this,"Parent contact Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RectorAddStudent.this,"Parent contact Required",Toast.LENGTH_SHORT).show();
         else if(et_em_contact.getText().toString().equals("")||et_em_contact.getText().toString().length()!=10)
-            Toast.makeText(AddNewStudent.this,"Emergency contact Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RectorAddStudent.this,"Emergency contact Required",Toast.LENGTH_SHORT).show();
         else if(et_college.getText().toString().equals(""))
-            Toast.makeText(AddNewStudent.this,"College Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RectorAddStudent.this,"College Required",Toast.LENGTH_SHORT).show();
 
         else
         {
-            final ProgressDialog progressDialog = new ProgressDialog(AddNewStudent.this);
+            final ProgressDialog progressDialog = new ProgressDialog(RectorAddStudent.this);
             progressDialog.setMessage("Creating New Student...");
             progressDialog.show();
 
@@ -223,8 +183,8 @@ public class AddNewStudent extends AppCompatActivity {
             Log.e("parent contact",et_parentcontact.getText().toString());
             Log.e("emergency contact",et_em_contact.getText().toString());
             Log.e("college",et_college.getText().toString());
-            Log.e("Hostel Id",String.valueOf(hostelListIdAL.get(spn_hostel.getSelectedItemPosition())));
-            Log.e("Block Id",String.valueOf(blockListIdAL.get(spn_block.getSelectedItemPosition())));
+            Log.e("Hostel Id",String.valueOf(session.gethostelid()));
+            Log.e("Block Id",String.valueOf(session.getblockid()));
             Log.e("Room Id",String.valueOf(roomListIdAL.get(spn_room.getSelectedItemPosition())));
             Log.e("dp",imageToString(bitmap));
             Log.e("extension",extension);
@@ -238,8 +198,8 @@ public class AddNewStudent extends AppCompatActivity {
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
                                 response = jsonObject.getString("response");
-                                Toast.makeText(AddNewStudent.this,response,Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(AddNewStudent.this,AdminActivity.class));
+                                Toast.makeText(RectorAddStudent.this,response,Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(RectorAddStudent.this,RectorActivity.class));
                                 finish();
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -269,8 +229,8 @@ public class AddNewStudent extends AppCompatActivity {
                     params.put("p_contact",et_parentcontact.getText().toString());
                     params.put("em_contact",et_em_contact.getText().toString());
                     params.put("college",et_college.getText().toString());
-                    params.put("hostelid",String.valueOf(hostelListIdAL.get(spn_hostel.getSelectedItemPosition())));
-                    params.put("blockid",String.valueOf(blockListIdAL.get(spn_block.getSelectedItemPosition())));
+                    params.put("hostelid",String.valueOf(session.gethostelid()));
+                    params.put("blockid",String.valueOf(session.getblockid()));
                     params.put("roomid",String.valueOf(roomListIdAL.get(spn_room.getSelectedItemPosition())));
                     params.put("password",tv_dob.getText().toString());
                     params.put("dp",imageToString(bitmap));
@@ -278,7 +238,7 @@ public class AddNewStudent extends AppCompatActivity {
                     return params;
                 }
             };
-            RequestQueue requestQueue = Volley.newRequestQueue(AddNewStudent.this);
+            RequestQueue requestQueue = Volley.newRequestQueue(RectorAddStudent.this);
             requestQueue.add(stringRequest);
         }
     }
@@ -302,116 +262,10 @@ public class AddNewStudent extends AppCompatActivity {
         }
     }
 
-    private void load_hostelList()
-    {
-        final ProgressDialog progressDialog = new ProgressDialog(AddNewStudent.this);
-        progressDialog.setMessage("Loading Data...");
-        progressDialog.show();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Const.API_URL
-                + Const.API_HOSTELLIST,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        progressDialog.dismiss();
-                        Log.e("hostel list",response);
-
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            for (int j=0;j<jsonArray.length();j++)
-                            {
-                                hostelListIdAL.add(jsonArray.getJSONObject(j).getInt("id"));
-                                hostelListNameAL.add(jsonArray.getJSONObject(j).getString("name"));
-                            }
-                            hostelListDataAA = new ArrayAdapter<String>(
-                                    AddNewStudent.this,
-                                    android.R.layout.simple_spinner_item,
-                                    hostelListNameAL);
-                            spn_hostel.setAdapter(hostelListDataAA);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressDialog.dismiss();
-                        Log.e("Error",error.toString());
-                    }
-                }
-        );
-        RequestQueue requestQueue = Volley.newRequestQueue(AddNewStudent.this);
-        requestQueue.add(stringRequest);
-    }
-
-    private void load_blockList(final int hostelId)
-    {
-        final ProgressDialog progressDialog = new ProgressDialog(AddNewStudent.this);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
-
-        blockListIdAL.clear();blockListNameAL.clear();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
-                + Const.API_GETBLOCKS,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("block list",response);
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            for (int j=0;j<jsonArray.length();j++)
-                            {
-                                blockListIdAL.add(jsonArray.getJSONObject(j).getInt("blockid"));
-                                blockListNameAL.add(jsonArray.getJSONObject(j).getString("bname"));
-                            }
-                            if (blockListIdAL.size()==0)
-                            {
-                                spn_block.setVisibility(View.GONE);
-                                spn_room.setVisibility(View.GONE);
-                                showmessage("Error!","There isn't any block inside this hostel " +
-                                        "Either create new block or select differet hostel");
-                            }
-                            else
-                            {
-                                blockListDataAA = new ArrayAdapter<String>(
-                                        AddNewStudent.this,
-                                        android.R.layout.simple_spinner_item,
-                                        blockListNameAL);
-                                spn_block.setAdapter(blockListDataAA);
-                                spn_block.setVisibility(View.VISIBLE);
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        progressDialog.dismiss();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressDialog.dismiss();
-                        Log.e("Error",error.toString());
-                    }
-                }
-        ){
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("hostelid",String.valueOf(hostelId));
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(AddNewStudent.this);
-        requestQueue.add(stringRequest);
-    }
-
     private void load_roomList(final int blockid)
     {
         Log.d("blockid ",String.valueOf(blockid));
-        final ProgressDialog progressDialog = new ProgressDialog(AddNewStudent.this);
+        final ProgressDialog progressDialog = new ProgressDialog(RectorAddStudent.this);
         progressDialog.setMessage("Loading Data...");
         progressDialog.show();
 
@@ -441,7 +295,7 @@ public class AddNewStudent extends AppCompatActivity {
                             else
                             {
                                 roomListDataAA = new ArrayAdapter<String>(
-                                        AddNewStudent.this,
+                                        RectorAddStudent.this,
                                         android.R.layout.simple_spinner_item,
                                         roomListNoAL);
                                 spn_room.setAdapter(roomListDataAA);
@@ -468,7 +322,7 @@ public class AddNewStudent extends AppCompatActivity {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(AddNewStudent.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(RectorAddStudent.this);
         requestQueue.add(stringRequest);
     }
 
@@ -479,7 +333,7 @@ public class AddNewStudent extends AppCompatActivity {
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(AddNewStudent.this,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(RectorAddStudent.this,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
@@ -508,7 +362,7 @@ public class AddNewStudent extends AppCompatActivity {
 
     private void showmessage(String title, String msg)
     {
-        AlertDialog alertDialog = new AlertDialog.Builder(AddNewStudent.this).create();
+        AlertDialog alertDialog = new AlertDialog.Builder(RectorAddStudent.this).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(msg);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",

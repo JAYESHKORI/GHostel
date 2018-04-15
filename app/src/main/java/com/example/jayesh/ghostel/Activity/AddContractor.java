@@ -43,7 +43,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddNewContractor extends AppCompatActivity{
+public class AddContractor extends AppCompatActivity{
 
     private EditText et_fname,et_lname,et_mname,et_email,et_contact,et_address,et_em_contact;
     private TextView tv_dob;
@@ -67,9 +67,9 @@ public class AddNewContractor extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_contractor);
+        setContentView(R.layout.activity_add_contractor);
 
-        bitmap = BitmapFactory.decodeResource(AddNewContractor.this.getResources(), R.mipmap.ic_dp);
+        bitmap = BitmapFactory.decodeResource(AddContractor.this.getResources(), R.mipmap.ic_dp);
 
         et_fname = (EditText)findViewById(R.id.addCont_et_fname);
         et_lname = (EditText)findViewById(R.id.addCont_et_lname);
@@ -124,24 +124,24 @@ public class AddNewContractor extends AppCompatActivity{
     private void addContractor()
     {
         if(et_fname.getText().toString().equals(""))
-            Toast.makeText(AddNewContractor.this,"First name Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddContractor.this,"First name Required",Toast.LENGTH_SHORT).show();
         else if(et_lname.getText().toString().equals(""))
-            Toast.makeText(AddNewContractor.this,"Last name Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddContractor.this,"Last name Required",Toast.LENGTH_SHORT).show();
         else if(et_mname.getText().toString().equals(""))
-            Toast.makeText(AddNewContractor.this,"Middle name Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddContractor.this,"Middle name Required",Toast.LENGTH_SHORT).show();
         else if(tv_dob.getText().toString().equals(""))
-            Toast.makeText(AddNewContractor.this,"Date of Birth Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddContractor.this,"Date of Birth Required",Toast.LENGTH_SHORT).show();
         else if(et_email.getText().toString().equals(""))
-            Toast.makeText(AddNewContractor.this,"Email Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddContractor.this,"Email Required",Toast.LENGTH_SHORT).show();
         else if(et_contact.getText().toString().equals("")||et_contact.getText().toString().length()!=10)
-            Toast.makeText(AddNewContractor.this,"Contact Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddContractor.this,"Contact Required",Toast.LENGTH_SHORT).show();
         else if(et_address.getText().toString().equals(""))
-            Toast.makeText(AddNewContractor.this,"Address Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddContractor.this,"Address Required",Toast.LENGTH_SHORT).show();
         else if(et_em_contact.getText().toString().equals("")||et_em_contact.getText().toString().length()!=10)
-            Toast.makeText(AddNewContractor.this,"Emergency contact Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddContractor.this,"Emergency contact Required",Toast.LENGTH_SHORT).show();
         else
         {
-            final ProgressDialog progressDialog = new ProgressDialog(AddNewContractor.this);
+            final ProgressDialog progressDialog = new ProgressDialog(AddContractor.this);
             progressDialog.setMessage("Creating New Contractor...");
             progressDialog.show();
 
@@ -167,7 +167,7 @@ public class AddNewContractor extends AppCompatActivity{
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
                                 response = jsonObject.getString("response");
-                                Toast.makeText(AddNewContractor.this,response,Toast.LENGTH_LONG).show();
+                                Toast.makeText(AddContractor.this,response,Toast.LENGTH_LONG).show();
                                 iv_dp.setImageResource(0);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -202,7 +202,7 @@ public class AddNewContractor extends AppCompatActivity{
                     return params;
                 }
             };
-            RequestQueue requestQueue = Volley.newRequestQueue(AddNewContractor.this);
+            RequestQueue requestQueue = Volley.newRequestQueue(AddContractor.this);
             requestQueue.add(stringRequest);
 
         }
@@ -215,7 +215,7 @@ public class AddNewContractor extends AppCompatActivity{
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(AddNewContractor.this,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(AddContractor.this,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
@@ -262,7 +262,7 @@ public class AddNewContractor extends AppCompatActivity{
 
     private void load_hostelList()
     {
-        final ProgressDialog progressDialog = new ProgressDialog(AddNewContractor.this);
+        final ProgressDialog progressDialog = new ProgressDialog(AddContractor.this);
         progressDialog.setMessage("Loading Data...");
         progressDialog.show();
 
@@ -282,7 +282,7 @@ public class AddNewContractor extends AppCompatActivity{
                                 hostelListNameAL.add(jsonArray.getJSONObject(j).getString("name"));
                             }
                             hostelListDataAA = new ArrayAdapter<String>(
-                                    AddNewContractor.this,
+                                    AddContractor.this,
                                     android.R.layout.simple_spinner_item,
                                     hostelListNameAL);
                             spn_hostel.setAdapter(hostelListDataAA);
@@ -299,14 +299,14 @@ public class AddNewContractor extends AppCompatActivity{
                     }
                 }
         );
-        RequestQueue requestQueue = Volley.newRequestQueue(AddNewContractor.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(AddContractor.this);
         requestQueue.add(stringRequest);
     }
 
     private void load_blockList(final int hostelId)
     {
         Log.d("hostelId ",String.valueOf(hostelId));
-        final ProgressDialog progressDialog = new ProgressDialog(AddNewContractor.this);
+        final ProgressDialog progressDialog = new ProgressDialog(AddContractor.this);
         progressDialog.setMessage("Loading Data...");
         progressDialog.show();
 
@@ -330,7 +330,7 @@ public class AddNewContractor extends AppCompatActivity{
                                 }
                             }
                             blockListDataAA = new ArrayAdapter<String>(
-                                    AddNewContractor.this,
+                                    AddContractor.this,
                                     android.R.layout.simple_spinner_item,
                                     blockListNameAL);
                             spn_block.setAdapter(blockListDataAA);
@@ -347,7 +347,7 @@ public class AddNewContractor extends AppCompatActivity{
                     }
                 }
         );
-        RequestQueue requestQueue = Volley.newRequestQueue(AddNewContractor.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(AddContractor.this);
         requestQueue.add(stringRequest);
     }
 }

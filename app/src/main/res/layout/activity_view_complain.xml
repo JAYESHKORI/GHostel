@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.jayesh.ghostel.Activity.ViewComplainActivity">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_complainid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Complain Id"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Title"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorLochinvar"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Details"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:id="@+id/tv_hostelid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hostel Id"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_hostelname"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Hostel Name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:id="@+id/tv_blockid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Block Id"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_blockname"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Block Name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_roomid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Room Id"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_roomno"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Room no"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:id="@+id/tv_studentid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Student id"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:id="@+id/tv_studentname"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Student name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+    </LinearLayout>
+</ScrollView>
+</LinearLayout>

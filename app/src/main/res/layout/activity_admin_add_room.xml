@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.jayesh.ghostel.Activity.AddNewRoom">
+    tools:context="com.example.jayesh.ghostel.Activity.AdminAddRoom">
 
     <Spinner
         android:id="@+id/spn_hostelname"

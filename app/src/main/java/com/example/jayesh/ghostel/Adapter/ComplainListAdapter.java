@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jayesh.ghostel.Activity.EditStudentActivity;
+import com.example.jayesh.ghostel.Activity.ViewComplainActivity;
 import com.example.jayesh.ghostel.Activity.ViewStudentActivity;
 import com.example.jayesh.ghostel.Model.CommonData;
 import com.example.jayesh.ghostel.Model.ComplainListData;
@@ -34,153 +35,118 @@ import java.util.Map;
  * Created by jayesh on 19/2/18.
  */
 
-public class ComplainListAdapter //extends RecyclerView.Adapter<ComplainListAdapter.MyViewHolder>
+public class ComplainListAdapter extends RecyclerView.Adapter<ComplainListAdapter.MyViewHolder>
 {
-//    private Context caller;
-//    private ArrayList<ComplainListData> complainListData;
-//
-//    public class MyViewHolder extends RecyclerView.ViewHolder{
-//
-//        public TextView tv_id,tv_fname,tv_lname,tv_hid,tv_hname,tv_bid,tv_bname;
-//
-//        public MyViewHolder(View view) {
-//            super(view);
-//
-//
-//            tv_id = (TextView)view.findViewById(R.id.tv_common_id);
-//            tv_fname = (TextView)view.findViewById(R.id.tv_common_fname);
-//            tv_lname = (TextView)view.findViewById(R.id.tv_common_lname);
-//            tv_hid = (TextView)view.findViewById(R.id.tv_common_hid);
-//            tv_hname = (TextView)view.findViewById(R.id.tv_common_hname);
-//            tv_bid = (TextView)view.findViewById(R.id.tv_common_bid);
-//            tv_bname = (TextView)view.findViewById(R.id.tv_common_bname);
-//
-//            view.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(final View view) {
-//                    final int pos=getLayoutPosition();
-//                    final CharSequence[] items = {"View", "Edit", "Delete"};
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-//
-//                    builder.setTitle(complainListData.get(pos).getFname()+" "+complainListData.get(pos).getLname());
-//                    builder.setItems(items, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int item) {
-//                            switch (item)
-//                            {
-//                                case 0:
-//                                    view.getContext().startActivity(new Intent(view.getContext(),ViewStudentActivity.class)
-//                                            .putExtra("studentid",commonData.get(pos).getId()));
-//                                    break;
-//                                case 1:
-//                                    view.getContext().startActivity(new Intent(view.getContext(),EditStudentActivity.class)
-//                                            .putExtra("studentid",commonData.get(pos).getId()));
-//                                    break;
-//                                case 2:
-//                                    showwarning("Warning!","Do you really want to delete this record permenantly?",commonData.get(pos).getId());
-//                                    break;
-//                            }
-//                        }
-//                    });
-//                    builder.show();
-//                    return true;
-//                }
-//            });
-//
-//            view.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    int pos=getLayoutPosition();
-//
-//                }
-//            });
-//        }
-//
-//    }
-//
-//    public ComplainListAdapter(Context context, ArrayList<ComplainListData> complainListData) {
-//        this.caller = context;
-//        this.complainListData = complainListData;
-//        Log.e("Data",complainListData.toString());
-//    }
-//
-//    @Override
-//    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        View itemView = LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.adapter_complain_list, parent, false);
-//
-//        return new MyViewHolder(itemView);
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(ComplainListAdapter.MyViewHolder holder, final int position)
-//    {
-//        holder.tv_id.setText(String.valueOf(commonData.get(position).getId()));
-//        holder.tv_fname.setText(commonData.get(position).getFname());
-//        holder.tv_lname.setText(commonData.get(position).getLname());
-//        holder.tv_hid.setText(String.valueOf(commonData.get(position).getHid()));
-//        holder.tv_hname.setText(commonData.get(position).getHname());
-//        holder.tv_bid.setText(String.valueOf(commonData.get(position).getBid()));
-//        holder.tv_bname.setText(commonData.get(position).getBname());
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return commonData.size();
-//    }
-//
-//    private void showwarning(String title, String msg, final int studentid)
-//    {
-//        android.support.v7.app.AlertDialog alertDialog = new android.support.v7.app.AlertDialog.Builder(caller).create();
-//        alertDialog.setTitle(title);
-//        alertDialog.setMessage(msg);
-//        alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_NEUTRAL, "No",
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//        alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                deleteStudent(studentid);
-//            }
-//        });
-//        alertDialog.show();
-//    }
-//
-//    private void deleteStudent(final int studentid) {
-//        final ProgressDialog progressDialog = new ProgressDialog(caller);
-//        progressDialog.setMessage("Deleting...");
-//        progressDialog.show();
-//
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
-//                + Const.API_DELSTUDENT,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Log.d("response",response);
-//                        progressDialog.dismiss();
-//                        Toast.makeText(caller,response,Toast.LENGTH_LONG).show();
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        progressDialog.dismiss();
-//                        Log.e("Error",error.toString());
-//                    }
-//                }
-//        ){
-//            @Override
-//            protected Map<String, String> getParams()
-//            {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("studentid",String.valueOf(studentid));
-//                return params;
-//            }
-//        };
-//        RequestQueue requestQueue = Volley.newRequestQueue(caller);
-//        requestQueue.add(stringRequest);
-//    }
+    private Context caller;
+    private ArrayList<ComplainListData> complainListData;
+
+    public class MyViewHolder extends RecyclerView.ViewHolder{
+
+        public TextView tv_complainid,tv_title,tv_detail,tv_hostelid,tv_hostelname,tv_blockid,tv_blockname,tv_roomid,
+                tv_roomno,tv_studentid,tv_studentname,tv_status;
+
+        public MyViewHolder(View view) {
+            super(view);
+
+
+            tv_complainid = (TextView)view.findViewById(R.id.tv_complainid);
+            tv_title = (TextView)view.findViewById(R.id.tv_title);
+            tv_detail = (TextView)view.findViewById(R.id.tv_detail);
+            tv_hostelid = (TextView)view.findViewById(R.id.tv_hostelid);
+            tv_hostelname = (TextView)view.findViewById(R.id.tv_hostelname);
+            tv_blockid = (TextView)view.findViewById(R.id.tv_blockid);
+            tv_blockname = (TextView)view.findViewById(R.id.tv_blockname);
+            tv_roomid = (TextView)view.findViewById(R.id.tv_roomid);
+            tv_roomno = (TextView)view.findViewById(R.id.tv_roomno);
+            tv_studentid = (TextView)view.findViewById(R.id.tv_studentid);
+            tv_studentname = (TextView)view.findViewById(R.id.tv_studentname);
+            tv_status = (TextView)view.findViewById(R.id.tv_status);
+
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(final View view) {
+                    final int pos=getLayoutPosition();
+                    final CharSequence[] items = {"View"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
+                    builder.setTitle(complainListData.get(pos).getTitle());
+                    builder.setItems(items, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int item) {
+                            switch (item)
+                            {
+                                case 0:
+                                    view.getContext().startActivity(new Intent(view.getContext(),ViewComplainActivity.class)
+                                            .putExtra("complainid",complainListData.get(pos).getComplainid()));
+
+                                    Intent intent = new Intent(view.getContext(), ViewComplainActivity.class);
+                                    intent.putExtra("complainid",String.valueOf(complainListData.get(pos).getComplainid()));
+                                    intent.putExtra("title",complainListData.get(pos).getTitle());
+                                    intent.putExtra("detail",complainListData.get(pos).getDetail());
+                                    intent.putExtra("hostelid",String.valueOf(complainListData.get(pos).getHostelid()));
+                                    intent.putExtra("hostelname",complainListData.get(pos).getHostelname());
+                                    intent.putExtra("blockid",String.valueOf(complainListData.get(pos).getBlockid()));
+                                    intent.putExtra("blockname",complainListData.get(pos).getBlockname());
+                                    intent.putExtra("roomid",String.valueOf(complainListData.get(pos).getRoomid()));
+                                    intent.putExtra("roomno",complainListData.get(pos).getRoomnono());
+                                    intent.putExtra("studentid",String.valueOf(complainListData.get(pos).getStudentid()));
+                                    intent.putExtra("name",complainListData.get(pos).getStudentname());
+                                    intent.putExtra("status",String.valueOf(complainListData.get(pos).getStatus()));
+                                    view.getContext().startActivity(intent);
+                                    break;
+                            }
+                        }
+                    });
+                    builder.show();
+                    return true;
+                }
+            });
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos=getLayoutPosition();
+
+                }
+            });
+        }
+
+    }
+
+    public ComplainListAdapter(Context context, ArrayList<ComplainListData> complainListData) {
+        this.caller = context;
+        this.complainListData = complainListData;
+        Log.e("Data",complainListData.toString());
+    }
+
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.adapter_complain_list, parent, false);
+
+        return new MyViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(ComplainListAdapter.MyViewHolder holder, final int position)
+    {
+        holder.tv_complainid.setText(String.valueOf(complainListData.get(position).getComplainid()));
+        holder.tv_title.setText(complainListData.get(position).getTitle());
+        holder.tv_detail.setText(complainListData.get(position).getDetail());
+        holder.tv_hostelid.setText(String.valueOf(complainListData.get(position).getHostelid()));
+        holder.tv_hostelname.setText(complainListData.get(position).getHostelname());
+        holder.tv_blockid.setText(String.valueOf(complainListData.get(position).getBlockid()));
+        holder.tv_blockname.setText(complainListData.get(position).getBlockname());
+        holder.tv_roomid.setText(String.valueOf(complainListData.get(position).getRoomid()));
+        holder.tv_roomno.setText(complainListData.get(position).getRoomnono());
+        holder.tv_studentid.setText(String.valueOf(complainListData.get(position).getStudentid()));
+        holder.tv_studentname.setText(complainListData.get(position).getStudentname());
+        holder.tv_status.setText(String.valueOf(complainListData.get(position).getStatus()));
+    }
+
+    @Override
+    public int getItemCount() {
+        return complainListData.size();
+    }
+
 }

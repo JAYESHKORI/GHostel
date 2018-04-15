@@ -18,7 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.jayesh.ghostel.Activity.AddNewContractor;
+import com.example.jayesh.ghostel.Activity.AddContractor;
 import com.example.jayesh.ghostel.Adapter.ContractorListAdapter;
 import com.example.jayesh.ghostel.Model.CommonData;
 import com.example.jayesh.ghostel.R;
@@ -33,7 +33,7 @@ import java.util.ArrayList;
  * Created by jayesh on 28/2/18.
  */
 
-public class LoadContractorList extends Fragment
+public class ContractorList extends Fragment
 {
     private static final String ARG_PARAM7 = "param7";
     private static final String ARG_PARAM8 = "param8";
@@ -48,12 +48,12 @@ public class LoadContractorList extends Fragment
     private ArrayList<CommonData> commonDataArrayList;
     private FloatingActionButton fab_add_contractor;
 
-    public LoadContractorList() {
+    public ContractorList() {
         // Required empty public constructor
     }
 
-    public static LoadContractorList newInstance(String param7, String param8) {
-        LoadContractorList fragment = new LoadContractorList();
+    public static ContractorList newInstance(String param7, String param8) {
+        ContractorList fragment = new ContractorList();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM7, param7);
         args.putString(ARG_PARAM8, param8);
@@ -83,7 +83,7 @@ public class LoadContractorList extends Fragment
         fab_add_contractor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), AddNewContractor.class);
+                Intent i = new Intent(getContext(), AddContractor.class);
                 startActivity(i);
             }
         });

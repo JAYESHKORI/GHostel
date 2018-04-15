@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,7 +23,7 @@ import com.example.jayesh.ghostel.Utils.Const;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddNewHostel extends AppCompatActivity {
+public class AddHostel extends AppCompatActivity {
 
     private EditText et_hostel_name,et_desc;
     private RadioGroup rg_type;
@@ -32,7 +31,7 @@ public class AddNewHostel extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_hostel);
+        setContentView(R.layout.activity_add_hostel);
 
         et_hostel_name = (EditText) findViewById(R.id.et_hostel_name);
         et_desc = (EditText) findViewById(R.id.et_desc);
@@ -52,7 +51,7 @@ public class AddNewHostel extends AppCompatActivity {
 
         if (et_hostel_name.getText().toString().equals(""))
         {
-            Toast.makeText(AddNewHostel.this,"Provide hostel name",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddHostel.this,"Provide hostel name",Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -60,7 +59,7 @@ public class AddNewHostel extends AppCompatActivity {
             Log.d("descrption",et_desc.getText().toString());
             Log.d("type",radioButton.getText().toString());
 
-            final ProgressDialog progressDialog = new ProgressDialog(AddNewHostel.this);
+            final ProgressDialog progressDialog = new ProgressDialog(AddHostel.this);
             progressDialog.setMessage("Creating New Hostel..");
             progressDialog.show();
 
@@ -70,7 +69,7 @@ public class AddNewHostel extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             progressDialog.dismiss();
-                            Toast.makeText(AddNewHostel.this,response,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddHostel.this,response,Toast.LENGTH_SHORT).show();
                         }
                     },
                     new Response.ErrorListener() {
@@ -91,7 +90,7 @@ public class AddNewHostel extends AppCompatActivity {
                     return params;
                 }
             };
-            RequestQueue requestQueue = Volley.newRequestQueue(AddNewHostel.this);
+            RequestQueue requestQueue = Volley.newRequestQueue(AddHostel.this);
             requestQueue.add(stringRequest);
         }
     }

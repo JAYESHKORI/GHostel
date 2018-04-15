@@ -18,12 +18,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.jayesh.ghostel.Fragment.LoadBlockList;
-import com.example.jayesh.ghostel.Fragment.LoadContractorList;
-import com.example.jayesh.ghostel.Fragment.LoadHostelList;
-import com.example.jayesh.ghostel.Fragment.LoadRectorList;
-import com.example.jayesh.ghostel.Fragment.LoadRoomList;
-import com.example.jayesh.ghostel.Fragment.LoadStudentList;
+import com.example.jayesh.ghostel.Fragment.BlockList;
+import com.example.jayesh.ghostel.Fragment.ComplainList;
+import com.example.jayesh.ghostel.Fragment.ContractorList;
+import com.example.jayesh.ghostel.Fragment.HostelList;
+import com.example.jayesh.ghostel.Fragment.RectorList;
+import com.example.jayesh.ghostel.Fragment.RoomList;
+import com.example.jayesh.ghostel.Fragment.StudentList;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.SharedPrefrences.Session;
 import com.example.jayesh.ghostel.Utils.Const;
@@ -78,17 +79,19 @@ public class AdminActivity extends AppCompatActivity
         Fragment fragment =null;
 
         if (id == R.id.nav_hostel) {
-            fragment = new LoadHostelList();
+            fragment = new HostelList();
         } else if (id == R.id.nav_blocks) {
-            fragment = new LoadBlockList();
+            fragment = new BlockList();
         } else if (id == R.id.nav_rooms) {
-            fragment = new LoadRoomList();
+            fragment = new RoomList();
         }else if (id == R.id.nav_rectors) {
-            fragment = new LoadRectorList();
+            fragment = new RectorList();
         } else if (id == R.id.nav_mess) {
-            fragment = new LoadContractorList();
+            fragment = new ContractorList();
         } else if (id == R.id.nav_student) {
-            fragment = new LoadStudentList();
+            fragment = new StudentList();
+        } else if (id == R.id.nav_complains) {
+            fragment = new ComplainList();
         }
         if (fragment!=null)
         {
@@ -120,6 +123,8 @@ public class AdminActivity extends AppCompatActivity
                 session.setUsername("");
                 session.setUsertype("X");
                 session.setImgURL("X");
+                session.sethostelid(-1);
+                session.setblockid(-1);
                 startActivity(new Intent(AdminActivity.this,MainActivity.class));
                 finish();
                 break;

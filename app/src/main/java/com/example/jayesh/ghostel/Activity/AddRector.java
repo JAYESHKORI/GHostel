@@ -43,7 +43,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddNewRector extends AppCompatActivity{
+public class AddRector extends AppCompatActivity{
 
     private EditText et_fname,et_lname,et_mname,et_email,et_contact,et_address,et_em_contact;
     private TextView tv_dob;
@@ -67,9 +67,9 @@ public class AddNewRector extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_rector);
+        setContentView(R.layout.activity_add_rector);
 
-        bitmap = BitmapFactory.decodeResource(AddNewRector.this.getResources(), R.mipmap.ic_dp);
+        bitmap = BitmapFactory.decodeResource(AddRector.this.getResources(), R.mipmap.ic_dp);
 
         et_fname = (EditText)findViewById(R.id.addRact_et_fname);
         et_lname = (EditText)findViewById(R.id.addRact_et_lname);
@@ -124,24 +124,24 @@ public class AddNewRector extends AppCompatActivity{
     private void addRector()
     {
         if(et_fname.getText().toString().equals(""))
-            Toast.makeText(AddNewRector.this,"First name Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRector.this,"First name Required",Toast.LENGTH_SHORT).show();
         else if(et_lname.getText().toString().equals(""))
-            Toast.makeText(AddNewRector.this,"Last name Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRector.this,"Last name Required",Toast.LENGTH_SHORT).show();
         else if(et_mname.getText().toString().equals(""))
-            Toast.makeText(AddNewRector.this,"Middle name Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRector.this,"Middle name Required",Toast.LENGTH_SHORT).show();
         else if(tv_dob.getText().toString().equals(""))
-            Toast.makeText(AddNewRector.this,"Date of Birth Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRector.this,"Date of Birth Required",Toast.LENGTH_SHORT).show();
         else if(et_email.getText().toString().equals(""))
-            Toast.makeText(AddNewRector.this,"Email Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRector.this,"Email Required",Toast.LENGTH_SHORT).show();
         else if(et_contact.getText().toString().equals("")||et_contact.getText().toString().length()!=10)
-            Toast.makeText(AddNewRector.this,"Contact Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRector.this,"Contact Required",Toast.LENGTH_SHORT).show();
         else if(et_address.getText().toString().equals(""))
-            Toast.makeText(AddNewRector.this,"Address Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRector.this,"Address Required",Toast.LENGTH_SHORT).show();
         else if(et_em_contact.getText().toString().equals("")||et_em_contact.getText().toString().length()!=10)
-            Toast.makeText(AddNewRector.this,"Emergency contact Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddRector.this,"Emergency contact Required",Toast.LENGTH_SHORT).show();
         else
         {
-            final ProgressDialog progressDialog = new ProgressDialog(AddNewRector.this);
+            final ProgressDialog progressDialog = new ProgressDialog(AddRector.this);
             progressDialog.setMessage("Creating New Rector...");
             progressDialog.show();
 
@@ -167,7 +167,7 @@ public class AddNewRector extends AppCompatActivity{
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
                                 response = jsonObject.getString("response");
-                                Toast.makeText(AddNewRector.this,response,Toast.LENGTH_LONG).show();
+                                Toast.makeText(AddRector.this,response,Toast.LENGTH_LONG).show();
                                 iv_dp.setImageResource(0);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -202,7 +202,7 @@ public class AddNewRector extends AppCompatActivity{
                     return params;
                 }
             };
-            RequestQueue requestQueue = Volley.newRequestQueue(AddNewRector.this);
+            RequestQueue requestQueue = Volley.newRequestQueue(AddRector.this);
             requestQueue.add(stringRequest);
 
         }
@@ -215,7 +215,7 @@ public class AddNewRector extends AppCompatActivity{
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(AddNewRector.this,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(AddRector.this,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
@@ -262,7 +262,7 @@ public class AddNewRector extends AppCompatActivity{
 
     private void load_hostelList()
     {
-        final ProgressDialog progressDialog = new ProgressDialog(AddNewRector.this);
+        final ProgressDialog progressDialog = new ProgressDialog(AddRector.this);
         progressDialog.setMessage("Loading Data...");
         progressDialog.show();
 
@@ -282,7 +282,7 @@ public class AddNewRector extends AppCompatActivity{
                                 hostelListNameAL.add(jsonArray.getJSONObject(j).getString("name"));
                             }
                             hostelListDataAA = new ArrayAdapter<String>(
-                                    AddNewRector.this,
+                                    AddRector.this,
                                     android.R.layout.simple_spinner_item,
                                     hostelListNameAL);
                             spn_hostel.setAdapter(hostelListDataAA);
@@ -299,14 +299,14 @@ public class AddNewRector extends AppCompatActivity{
                     }
                 }
         );
-        RequestQueue requestQueue = Volley.newRequestQueue(AddNewRector.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(AddRector.this);
         requestQueue.add(stringRequest);
     }
 
     private void load_blockList(final int hostelId)
     {
         Log.d("hostelId ",String.valueOf(hostelId));
-        final ProgressDialog progressDialog = new ProgressDialog(AddNewRector.this);
+        final ProgressDialog progressDialog = new ProgressDialog(AddRector.this);
         progressDialog.setMessage("Loading Data...");
         progressDialog.show();
 
@@ -330,7 +330,7 @@ public class AddNewRector extends AppCompatActivity{
                                 }
                             }
                             blockListDataAA = new ArrayAdapter<String>(
-                                    AddNewRector.this,
+                                    AddRector.this,
                                     android.R.layout.simple_spinner_item,
                                     blockListNameAL);
                             spn_block.setAdapter(blockListDataAA);
@@ -347,7 +347,7 @@ public class AddNewRector extends AppCompatActivity{
                     }
                 }
         );
-        RequestQueue requestQueue = Volley.newRequestQueue(AddNewRector.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(AddRector.this);
         requestQueue.add(stringRequest);
     }
 }

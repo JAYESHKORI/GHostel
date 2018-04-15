@@ -19,22 +19,28 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.jayesh.ghostel.Activity.AddNewRoom;
+import com.example.jayesh.ghostel.Activity.AdminAddRoom;
+import com.example.jayesh.ghostel.Activity.AdminAddStudent;
+import com.example.jayesh.ghostel.Activity.RectorAddRoom;
+import com.example.jayesh.ghostel.Activity.RectorAddStudent;
 import com.example.jayesh.ghostel.Adapter.RoomListAdapter;
 import com.example.jayesh.ghostel.Model.RoomListData;
 import com.example.jayesh.ghostel.R;
+import com.example.jayesh.ghostel.SharedPrefrences.Session;
 import com.example.jayesh.ghostel.Utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jayesh on 8/4/18.
  */
 
-public class LoadRoomList extends Fragment
+public class RoomList extends Fragment
 {
     private RecyclerView rv_block_list;
     private RecyclerView.Adapter roomListAdapter;
@@ -43,14 +49,15 @@ public class LoadRoomList extends Fragment
     private FloatingActionButton fab_add_block;
 
     private TextView tv_msg;
-    private String TAG = "HomeFragment";
 
-    public LoadRoomList() {
+    private Session session;
+
+    public RoomList() {
         // Required empty public constructor
     }
 
-    public static LoadRoomList newInstance(String param3, String param4) {
-        LoadRoomList fragment = new LoadRoomList();
+    public static RoomList newInstance(String param3, String param4) {
+        RoomList fragment = new RoomList();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -64,7 +71,7 @@ public class LoadRoomList extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        session = new Session(getContext());
         view =  inflater.inflate(R.layout.frag_load_blocklist, container, false);
         rv_block_list = (RecyclerView)view.findViewById(R.id.rv_block_list);
         rv_block_list.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -75,8 +82,16 @@ public class LoadRoomList extends Fragment
         fab_add_block.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), AddNewRoom.class);
-                startActivity(i);
+                if (getActivity().toString().contains("AdminActivity"))
+                {
+                    Intent i = new Intent(getContext(), AdminAddRoom.class);
+                    startActivity(i);
+                }
+                else if (getActivity().toString().contains("RectorActivity"))
+                {
+                    Intent i = new Intent(getContext(), RectorAddRoom.class);
+                    startActivity(i);
+                }
             }
         });
         return view;
@@ -88,13 +103,13 @@ public class LoadRoomList extends Fragment
         progressDialog.setMessage("Loading Data...");
         progressDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Const.API_URL
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
                 + Const.API_ROOMLIST,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
-                        Log.e("response",response);
+                        Log.e("room list",response);
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             for (int j=0;j<jsonArray.length();j++)
@@ -125,7 +140,16 @@ public class LoadRoomList extends Fragment
                         Log.e("Error",error.toString());
                     }
                 }
-        );
+        ){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("usertype",session.getUsertype());
+                params.put("userid",String.valueOf(session.getid()));
+                return params;
+            }
+        };
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
     }

@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddNewBlock extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class AddBlock extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private Spinner spn_addB_hostelList;
     private ArrayList<Integer> hostelListIdAL;
@@ -48,7 +48,7 @@ public class AddNewBlock extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_block);
+        setContentView(R.layout.activity_add_block);
 
         spn_addB_hostelList = (Spinner)findViewById(R.id.spn_addB_hostelList);
         spn_addB_hostelList.setOnItemSelectedListener(this);
@@ -67,7 +67,7 @@ public class AddNewBlock extends AppCompatActivity implements View.OnClickListen
 
     private void load_spn_addB_hostelList()
     {
-        final ProgressDialog progressDialog = new ProgressDialog(AddNewBlock.this);
+        final ProgressDialog progressDialog = new ProgressDialog(AddBlock.this);
         progressDialog.setMessage("Loading Data...");
         progressDialog.show();
 
@@ -88,7 +88,7 @@ public class AddNewBlock extends AppCompatActivity implements View.OnClickListen
                                 hostelListTypeAL.add(jsonArray.getJSONObject(j).getString("type"));
                             }
                             hostelListDataAA = new ArrayAdapter<String>(
-                                    AddNewBlock.this,
+                                    AddBlock.this,
                                     android.R.layout.simple_spinner_item,
                                     hostelListNameAL);
                             spn_addB_hostelList.setAdapter(hostelListDataAA);
@@ -105,7 +105,7 @@ public class AddNewBlock extends AppCompatActivity implements View.OnClickListen
                     }
                 }
         );
-        RequestQueue requestQueue = Volley.newRequestQueue(AddNewBlock.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(AddBlock.this);
         requestQueue.add(stringRequest);
     }
 
@@ -116,19 +116,19 @@ public class AddNewBlock extends AppCompatActivity implements View.OnClickListen
         final RadioButton radioButton = (RadioButton) findViewById(selectedId);
 
         if (!hostelType.equals(radioButton.getText().toString())) {
-            Toast.makeText(AddNewBlock.this,"LoadBlockList and LoadHostelList Types are not matching",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddBlock.this,"BlockList and HostelList Types are not matching",Toast.LENGTH_SHORT).show();
         }
         else if(et_BName.getText().toString().equals(""))
         {
-            Toast.makeText(AddNewBlock.this,"Please enter block name",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddBlock.this,"Please enter block name",Toast.LENGTH_SHORT).show();
         }
         else if(et_Bcapacity.getText().toString().equals(""))
         {
-            Toast.makeText(AddNewBlock.this,"Please enter block name",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddBlock.this,"Please enter block name",Toast.LENGTH_SHORT).show();
         }
         else
         {
-            final ProgressDialog progressDialog = new ProgressDialog(AddNewBlock.this);
+            final ProgressDialog progressDialog = new ProgressDialog(AddBlock.this);
             progressDialog.setMessage("Creating New Block..");
             progressDialog.show();
 
@@ -144,7 +144,7 @@ public class AddNewBlock extends AppCompatActivity implements View.OnClickListen
                         @Override
                         public void onResponse(String response) {
                             progressDialog.dismiss();
-                            Toast.makeText(AddNewBlock.this,response,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddBlock.this,response,Toast.LENGTH_SHORT).show();
                         }
                     },
                     new Response.ErrorListener() {
@@ -166,7 +166,7 @@ public class AddNewBlock extends AppCompatActivity implements View.OnClickListen
                     return params;
                 }
             };
-            RequestQueue requestQueue = Volley.newRequestQueue(AddNewBlock.this);
+            RequestQueue requestQueue = Volley.newRequestQueue(AddBlock.this);
             requestQueue.add(stringRequest);
 
         }

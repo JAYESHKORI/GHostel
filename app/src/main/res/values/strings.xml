@@ -16,4 +16,5 @@
         <item>ADMIN</item>
     </string-array>
     <string name="title_activity_student">StudentActivity</string>
+    <string name="title_activity_rector">RectorActivity</string>
 </resources>

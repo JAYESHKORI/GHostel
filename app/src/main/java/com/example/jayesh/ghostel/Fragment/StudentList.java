@@ -18,22 +18,26 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.jayesh.ghostel.Activity.AddNewStudent;
+import com.example.jayesh.ghostel.Activity.AdminAddStudent;
+import com.example.jayesh.ghostel.Activity.RectorAddStudent;
 import com.example.jayesh.ghostel.Adapter.StudentListAdapter;
 import com.example.jayesh.ghostel.Model.CommonData;
 import com.example.jayesh.ghostel.R;
+import com.example.jayesh.ghostel.SharedPrefrences.Session;
 import com.example.jayesh.ghostel.Utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jayesh on 2/3/18.
  */
 
-public class LoadStudentList extends Fragment
+public class StudentList extends Fragment
 {
     private static final String ARG_PARAM9 = "param9";
     private static final String ARG_PARAM10 = "param10";
@@ -48,12 +52,14 @@ public class LoadStudentList extends Fragment
     private ArrayList<CommonData> commonDataArrayList;
     private FloatingActionButton fab_add_student;
 
-    public LoadStudentList() {
+    private Session session;
+
+    public StudentList() {
         // Required empty public constructor
     }
 
-    public static LoadContractorList newInstance(String param9, String param10) {
-        LoadContractorList fragment = new LoadContractorList();
+    public static ContractorList newInstance(String param9, String param10) {
+        ContractorList fragment = new ContractorList();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM9, param9);
         args.putString(ARG_PARAM10, param10);
@@ -73,6 +79,7 @@ public class LoadStudentList extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        session = new Session(getContext());
         view =  inflater.inflate(R.layout.frag_load_studentlist, container, false);
         rv_studentList = (RecyclerView)view.findViewById(R.id.rv_student_list);
         rv_studentList.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -83,8 +90,17 @@ public class LoadStudentList extends Fragment
         fab_add_student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), AddNewStudent.class);
-                startActivity(i);
+                if (getActivity().toString().contains("AdminActivity"))
+                {
+                    Intent i = new Intent(getContext(), AdminAddStudent.class);
+                    startActivity(i);
+                }
+                else if (getActivity().toString().contains("RectorActivity"))
+                {
+                    Intent i = new Intent(getContext(), RectorAddStudent.class);
+                    startActivity(i);
+                }
+
             }
         });
         return view;
@@ -96,13 +112,13 @@ public class LoadStudentList extends Fragment
         progressDialog.setMessage("Loading Data...");
         progressDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Const.API_URL
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
                 + Const.API_STUDENTLIST,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
-                        Log.e("response",response);
+                        Log.e("student list",response);
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             for (int j=0;j<jsonArray.length();j++)
@@ -132,7 +148,16 @@ public class LoadStudentList extends Fragment
                         Log.e("Error",error.toString());
                     }
                 }
-        );
+        ){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("usertype",session.getUsertype());
+                params.put("userid",String.valueOf(session.getid()));
+                return params;
+            }
+        };
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
     }

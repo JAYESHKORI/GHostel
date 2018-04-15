@@ -48,4 +48,22 @@ public class Session {
         String imgURL = prefs.getString("imgURL","");
         return imgURL;
     }
+
+    public void sethostelid(int hostelid) {
+        prefs.edit().putInt("hostelid", hostelid).commit();
+    }
+
+    public int gethostelid() {
+        int hostelid = prefs.getInt("hostelid",-1);
+        return hostelid;
+    }
+
+    public void setblockid(int blockid) {
+        prefs.edit().putInt("blockid", blockid).commit();
+    }
+
+    public int getblockid() {
+        int blockid = prefs.getInt("blockid",-1);
+        return blockid;
+    }
 }

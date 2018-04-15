@@ -2,7 +2,6 @@ package com.example.jayesh.ghostel.Activity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,13 +25,12 @@ import com.example.jayesh.ghostel.Utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddNewRoom extends AppCompatActivity {
+public class AdminAddRoom extends AppCompatActivity {
 
     private Spinner spn_hostelname,spn_blockname;
     private TextView et_capacity,et_roomno;
@@ -49,7 +47,7 @@ public class AddNewRoom extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_room);
+        setContentView(R.layout.activity_admin_add_room);
 
         spn_hostelname = (Spinner)findViewById(R.id.spn_hostelname);
         spn_blockname = (Spinner)findViewById(R.id.spn_blockname);
@@ -86,12 +84,12 @@ public class AddNewRoom extends AppCompatActivity {
     private void createRoom()
     {
         if(et_capacity.getText().toString().equals(""))
-            Toast.makeText(AddNewRoom.this,"Room capacity required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminAddRoom.this,"Room capacity required",Toast.LENGTH_SHORT).show();
         else if(et_roomno.getText().toString().equals(""))
-            Toast.makeText(AddNewRoom.this,"Room no required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminAddRoom.this,"Room no required",Toast.LENGTH_SHORT).show();
         else
         {
-            final ProgressDialog progressDialog = new ProgressDialog(AddNewRoom.this);
+            final ProgressDialog progressDialog = new ProgressDialog(AdminAddRoom.this);
             progressDialog.setMessage("Creating New Room...");
             progressDialog.show();
 
@@ -123,14 +121,14 @@ public class AddNewRoom extends AppCompatActivity {
                     return params;
                 }
             };
-            RequestQueue requestQueue = Volley.newRequestQueue(AddNewRoom.this);
+            RequestQueue requestQueue = Volley.newRequestQueue(AdminAddRoom.this);
             requestQueue.add(stringRequest);
         }
     }
 
     private void load_hostelList()
     {
-        final ProgressDialog progressDialog = new ProgressDialog(AddNewRoom.this);
+        final ProgressDialog progressDialog = new ProgressDialog(AdminAddRoom.this);
         progressDialog.setMessage("Loading Data...");
         progressDialog.show();
 
@@ -150,7 +148,7 @@ public class AddNewRoom extends AppCompatActivity {
                                 hostelListNameAL.add(jsonArray.getJSONObject(j).getString("name"));
                             }
                             hostelListDataAA = new ArrayAdapter<String>(
-                                    AddNewRoom.this,
+                                    AdminAddRoom.this,
                                     android.R.layout.simple_spinner_item,
                                     hostelListNameAL);
                             spn_hostelname.setAdapter(hostelListDataAA);
@@ -167,13 +165,13 @@ public class AddNewRoom extends AppCompatActivity {
                     }
                 }
         );
-        RequestQueue requestQueue = Volley.newRequestQueue(AddNewRoom.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(AdminAddRoom.this);
         requestQueue.add(stringRequest);
     }
 
     private void load_blockList(final int hostelId)
     {
-        final ProgressDialog progressDialog = new ProgressDialog(AddNewRoom.this);
+        final ProgressDialog progressDialog = new ProgressDialog(AdminAddRoom.this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
@@ -200,7 +198,7 @@ public class AddNewRoom extends AppCompatActivity {
                             else
                             {
                                 blockListDataAA = new ArrayAdapter<String>(
-                                        AddNewRoom.this,
+                                        AdminAddRoom.this,
                                         android.R.layout.simple_spinner_item,
                                         blockListNameAL);
                                 spn_blockname.setAdapter(blockListDataAA);
@@ -229,13 +227,13 @@ public class AddNewRoom extends AppCompatActivity {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(AddNewRoom.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(AdminAddRoom.this);
         requestQueue.add(stringRequest);
     }
 
     private void showmessage(String title, String msg)
     {
-        AlertDialog alertDialog = new AlertDialog.Builder(AddNewRoom.this).create();
+        AlertDialog alertDialog = new AlertDialog.Builder(AdminAddRoom.this).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(msg);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",

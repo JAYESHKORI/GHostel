@@ -57,7 +57,7 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.MyVi
                             {
                                 case 0:
                                     view.getContext().startActivity(new Intent(view.getContext(),ViewBlockActivity.class)
-                                            .putExtra("blockid",blockListData.get(pos).getBlockid()));
+                                            .putExtra("blockid",String.valueOf(blockListData.get(pos).getBlockid())));
                                     break;
                                 case 1:
                                     Intent intent = new Intent(view.getContext(), EditBlockActivity.class);

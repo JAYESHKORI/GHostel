@@ -27,12 +27,11 @@
             android:name=".Activity.AdminActivity"
             android:label="@string/title_activity_admin"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.AddNewHostel" />
-        <activity android:name=".Activity.AddNewBlock" />
-        <activity android:name=".Activity.AddNewRector" />
-        <activity android:name=".Activity.AddNewContractor" />
-        <activity android:name=".Activity.AddNewStudent" />
-        <activity android:name=".Activity.RectorActivity" />
+        <activity android:name=".Activity.AddHostel" />
+        <activity android:name=".Activity.AddBlock" />
+        <activity android:name=".Activity.AddRector" />
+        <activity android:name=".Activity.AddContractor" />
+        <activity android:name=".Activity.AdminAddStudent" />
         <activity android:name=".Activity.ContractorActivity" />
         <activity android:name=".Activity.ShowQRCodeActivity" />
         <activity android:name=".Activity.ViewHostelActivity" />
@@ -50,7 +49,14 @@
             android:name=".Activity.StudentActivity"
             android:label="@string/title_activity_student"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.AddNewRoom"></activity>
+        <activity android:name=".Activity.AdminAddRoom" />
+        <activity android:name=".Activity.ViewComplainActivity" />
+        <activity
+            android:name=".Activity.RectorActivity"
+            android:label="@string/title_activity_rector"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activity.RectorAddStudent"></activity>
+        <activity android:name=".Activity.RectorAddRoom" />
     </application>
 
 </manifest>

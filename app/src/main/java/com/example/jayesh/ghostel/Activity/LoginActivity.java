@@ -38,6 +38,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private int id = 0;
     private String usertype = "X";
     private String imgURL = "";
+    private int hostelid = -1;
+    private int blockid = -1;
 
     private Session session;
     @Override
@@ -98,6 +100,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 id = jsonArray.getJSONObject(0).getInt("id");
                                 usertype = jsonArray.getJSONObject(0).getString("usertype");
                                 imgURL = jsonArray.getJSONObject(0).getString("imgURL");
+                                hostelid = jsonArray.getJSONObject(0).getInt("hostelid");
+                                blockid = jsonArray.getJSONObject(0).getInt("blockid");
 
                                 if(id>0)
                                 {
@@ -108,6 +112,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             session.setUsername(email);
                                             session.setUsertype("A");
                                             session.setImgURL(imgURL);
+                                            session.sethostelid(hostelid);
+                                            session.setblockid(blockid);
                                             startActivity(new Intent(LoginActivity.this,AdminActivity.class));
                                             finish();
                                             break;
@@ -116,6 +122,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             session.setUsername(email);
                                             session.setUsertype("S");
                                             session.setImgURL(imgURL);
+                                            session.sethostelid(hostelid);
+                                            session.setblockid(blockid);
                                             startActivity(new Intent(LoginActivity.this,StudentActivity.class));
                                             finish();
                                             break;
@@ -124,6 +132,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             session.setUsername(email);
                                             session.setUsertype("R");
                                             session.setImgURL(imgURL);
+                                            session.sethostelid(hostelid);
+                                            session.setblockid(blockid);
                                             startActivity(new Intent(LoginActivity.this,RectorActivity.class));
                                             finish();
                                             break;
@@ -132,6 +142,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             session.setUsername(email);
                                             session.setUsertype("C");
                                             session.setImgURL(imgURL);
+                                            session.sethostelid(hostelid);
+                                            session.setblockid(blockid);
                                             startActivity(new Intent(LoginActivity.this,ContractorActivity.class));
                                             finish();
                                             break;

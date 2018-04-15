@@ -2,8 +2,6 @@ package com.example.jayesh.ghostel.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,11 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.jayesh.ghostel.Fragment.GenerateQR;
-import com.example.jayesh.ghostel.Fragment.LoadBlockList;
-import com.example.jayesh.ghostel.Fragment.LoadContractorList;
-import com.example.jayesh.ghostel.Fragment.LoadHostelList;
-import com.example.jayesh.ghostel.Fragment.LoadRectorList;
-import com.example.jayesh.ghostel.Fragment.LoadStudentList;
+import com.example.jayesh.ghostel.Fragment.RectorList;
 import com.example.jayesh.ghostel.Fragment.RaiseComplain;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.SharedPrefrences.Session;
@@ -86,7 +80,7 @@ public class StudentActivity extends AppCompatActivity
         } else if (id == R.id.nav_raise_complain) {
             fragment = new RaiseComplain();
         } else if (id == R.id.nav_request) {
-            fragment = new LoadRectorList();
+            fragment = new RectorList();
         }
         if (fragment!=null)
         {
