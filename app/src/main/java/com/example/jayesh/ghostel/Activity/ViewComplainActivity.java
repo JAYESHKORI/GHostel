@@ -30,15 +30,16 @@ public class ViewComplainActivity extends AppCompatActivity {
 
         tv_complainid.setText(getIntent().getExtras().getString("complainid"));
         tv_title.setText(getIntent().getExtras().getString("title"));
-        tv_detail.setText("Detail "+getIntent().getExtras().getString("detail"));
+        tv_detail.setText(getIntent().getExtras().getString("detail"));
         tv_hostelid.setText(getIntent().getExtras().getString("hostelid"));
-        tv_hostelname.setText("Hostelname "+getIntent().getExtras().getString("hostelname"));
+        tv_hostelname.setText(getIntent().getExtras().getString("hostelname"));
         tv_blockid.setText(getIntent().getExtras().getString("blockid"));
-        tv_blockname.setText("Blockname "+getIntent().getExtras().getString("blockname"));
+        tv_blockname.setText(getIntent().getExtras().getString("blockname"));
         tv_roomid.setText(getIntent().getExtras().getString("roomid"));
-        tv_roomno.setText("Roomno "+getIntent().getExtras().getString("roomno"));
+        tv_roomno.setText(getIntent().getExtras().getString("roomno"));
         tv_studentid.setText(getIntent().getExtras().getString("studentid"));
-        tv_studentname.setText("By "+getIntent().getExtras().getString("name"));
+        tv_studentname.setText(getIntent().getExtras().getString("name"));
         tv_status.setText(getIntent().getExtras().getString("status"));
     }
+
 }

@@ -82,6 +82,8 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.MyVi
                 public void onClick(View view) {
                     int pos=getLayoutPosition();
                     System.out.println("Click: "+blockListData.get(pos).getBlockid());
+                    view.getContext().startActivity(new Intent(view.getContext(),ViewBlockActivity.class)
+                            .putExtra("blockid",String.valueOf(blockListData.get(pos).getBlockid())));
                 }
             });
         }

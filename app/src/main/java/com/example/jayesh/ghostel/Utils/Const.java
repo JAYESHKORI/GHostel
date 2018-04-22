@@ -15,13 +15,6 @@ public class Const
     // SOCKET TIMEOUT IS SET TO 30 SECONDS
     public static int TIMEOUT_SOCKET = 90000;
 
-    //ActivityConstants
-        public static final int ACTIVITY_ADMIN = 1001;
-        public static final int ACTIVITY_RECTOR = 1002;
-        public static final int ACTIVITY_CONTRACTOR = 1003;
-        public static final int ACTIVITY_STUDENT = 1004;
-
-
     // Api Response
     public static enum API_RESULT
     {
@@ -38,7 +31,8 @@ public class Const
     public static String API_ALERT = "MyRunningRecord";
 
 
-    public static final String API_URL = "http://192.168.43.31/ghostel/";
+//    public static final String API_URL = "http://192.168.43.31/ghostel/";
+    public static final String API_URL = "https://ghostel.000webhostapp.com/";
     public static final String API_HOSTELLIST = "hostellist.php";
     public static final String API_BLOCKLIST = "blocklist.php";
     public static final String API_ROOMLIST = "roomlist.php";

@@ -92,6 +92,8 @@ public class ContractorListAdapter extends RecyclerView.Adapter<ContractorListAd
                 @Override
                 public void onClick(View view) {
                     int pos=getLayoutPosition();
+                    view.getContext().startActivity(new Intent(view.getContext(),ViewContractorActivity.class)
+                            .putExtra("contractorid",commonData.get(pos).getId()));
 
                 }
             });

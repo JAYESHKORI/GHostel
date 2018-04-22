@@ -23,91 +23,232 @@
                 android:src="@mipmap/ic_dp"
                 android:id="@+id/iv_dp"/>
 
-            <TextView
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="First Name"
-                android:id="@+id/tv_fname"
-                android:layout_margin="20dp"
-                android:text="Ramanbhai"/>
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="@color/colorTradewind">
 
-            <TextView
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_margin="10dp"
+                    android:text="First Name"
+                    android:layout_alignParentLeft="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/tv_fname"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Last Name"
-                android:id="@+id/tv_lname"
-                android:layout_margin="20dp"
-                android:text="Chaganbhai"/>
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="@color/colorTradewind">
 
-            <TextView
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_margin="10dp"
+                    android:text="Last Name"
+                    android:layout_alignParentLeft="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/tv_lname"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Middle Name"
-                android:id="@+id/tv_mname"
-                android:layout_margin="20dp"
-                android:text="Desai"/>
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="@color/colorTradewind">
 
-            <TextView
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_margin="10dp"
+                    android:text="Middle Name"
+                    android:layout_alignParentLeft="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/tv_mname"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Select Date"
-                android:id="@+id/tv_dob"
-                android:textSize="18dp"
-                android:layout_margin="20dp"
-                android:text="23-8-1998"/>
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="@color/colorTradewind">
 
-            <TextView
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_margin="10dp"
+                    android:text="Date Of Birth"
+                    android:layout_alignParentLeft="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/tv_dob"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:id="@+id/tv_email"
-                android:layout_margin="20dp"
-                android:inputType="textEmailAddress"
-                android:text="Ramanbhai@gmail.com"/>
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="@color/colorTradewind">
 
-            <TextView
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_margin="10dp"
+                    android:text="Email"
+                    android:layout_alignParentLeft="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/tv_email"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Contact"
-                android:id="@+id/tv_contact"
-                android:layout_margin="20dp"
-                android:inputType="phone"
-                android:text="0987654321"/>
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="@color/colorTradewind">
 
-            <TextView
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_margin="10dp"
+                    android:text="Conatct"
+                    android:layout_alignParentLeft="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/tv_contact"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Permenant Address"
-                android:id="@+id/tv_address"
-                android:layout_margin="20dp"
-                android:minLines="2"
-                android:text="2,narol,ahmedabad"/>
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="@color/colorTradewind">
 
-            <TextView
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_margin="10dp"
+                    android:text="Address"
+                    android:layout_alignParentLeft="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/tv_address"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Emergency Contact"
-                android:id="@+id/tv_em_contact"
-                android:layout_margin="20dp"
-                android:inputType="phone"
-                android:text="0987654321"/>
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="@color/colorTradewind">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_margin="10dp"
+                    android:text="Emergency Contact"
+                    android:layout_alignParentLeft="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/tv_em_contact"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="@color/colorTradewind">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_margin="10dp"
+                    android:text="Hostel"
+                    android:layout_alignParentLeft="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/tv_hostel"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:hint="Hostel"
-                android:id="@+id/tv_hostel"
-                android:layout_margin="20dp">
-            </TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:hint="Block"
-                android:id="@+id/tv_block"
-                android:layout_margin="20dp">
-            </TextView>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="@color/colorTradewind">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_margin="10dp"
+                    android:text="Block"
+                    android:layout_alignParentLeft="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/tv_block"
+                    android:layout_margin="10dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>

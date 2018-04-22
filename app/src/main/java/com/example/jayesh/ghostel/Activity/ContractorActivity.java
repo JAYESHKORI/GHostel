@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.PatternMatcher;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -44,7 +46,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static android.Manifest.permission.CAMERA;
 
-public class ContractorActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler
+public class ContractorActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler,NavigationView.OnNavigationItemSelectedListener
 {
     public static final int REQUEST_CAMERA = 1;
     private ZXingScannerView zXingScannerView;
@@ -247,5 +249,10 @@ public class ContractorActivity extends AppCompatActivity implements ZXingScanne
                 break;
         }
         return true;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 }

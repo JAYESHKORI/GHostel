@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/chngdp"
+        android:title="Change Profile"/>
+    <item
+        android:id="@+id/chngpwd"
+        android:title="Change Password"/>
+    <item
         android:id="@+id/settings"
         android:title="Settings"/>
     <item

@@ -85,6 +85,8 @@ public class HostelListAdapter extends RecyclerView.Adapter<HostelListAdapter.My
                 public void onClick(View view) {
                     int pos=getLayoutPosition();
                     System.out.println("Click: "+hostelListData.get(pos).getId());
+                    view.getContext().startActivity(new Intent(view.getContext(),ViewHostelActivity.class)
+                            .putExtra("hostelid",hostelListData.get(pos).getId()));
                 }
             });
         }

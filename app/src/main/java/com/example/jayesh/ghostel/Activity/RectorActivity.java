@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.jayesh.ghostel.Fragment.ComplainList;
+import com.example.jayesh.ghostel.Fragment.GenerateQR;
 import com.example.jayesh.ghostel.Fragment.RoomList;
 import com.example.jayesh.ghostel.Fragment.StudentList;
 import com.example.jayesh.ghostel.R;
@@ -36,6 +37,11 @@ public class RectorActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rector);
+
+        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        tx.replace(R.id.screen_area,new StudentList());
+        tx.commit();
+
         session = new Session(RectorActivity.this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

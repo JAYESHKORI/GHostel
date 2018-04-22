@@ -30,7 +30,7 @@ import java.util.Map;
 public class ViewStudentActivity extends AppCompatActivity
 {
     private TextView tv_enroll,tv_fname,tv_lname,tv_mname,tv_email,tv_contact,tv_address,tv_pcontact,tv_econtact,tv_college,
-    tv_dob,tv_hostel,tv_block;
+    tv_dob,tv_hostel,tv_block,tv_roomno;
     private ImageView iv_dp;
     private String url;
     int studentid;
@@ -52,6 +52,7 @@ public class ViewStudentActivity extends AppCompatActivity
         tv_address = (TextView)findViewById(R.id.tv_address);
         tv_hostel = (TextView)findViewById(R.id.tv_hostel);
         tv_block = (TextView)findViewById(R.id.tv_block);
+        tv_roomno = (TextView)findViewById(R.id.tv_roomno);
         tv_college = (TextView)findViewById(R.id.tv_college);
         iv_dp = (ImageView)findViewById(R.id.iv_sdp);
 
@@ -87,6 +88,7 @@ public class ViewStudentActivity extends AppCompatActivity
                             tv_dob.setText(jsonArray.getJSONObject(0).getString("dob"));
                             tv_hostel.setText(jsonArray.getJSONObject(0).getString("hostel"));
                             tv_block.setText(jsonArray.getJSONObject(0).getString("block"));
+                            tv_roomno.setText(jsonArray.getJSONObject(0).getString("room"));
                             url = jsonArray.getJSONObject(0).getString("url");
                             Log.d("url",Const.API_URL+url);
                             Glide.with(ViewStudentActivity.this).load(Const.API_URL+url).into(iv_dp);

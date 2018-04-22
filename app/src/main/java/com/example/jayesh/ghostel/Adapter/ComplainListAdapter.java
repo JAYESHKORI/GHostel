@@ -106,6 +106,23 @@ public class ComplainListAdapter extends RecyclerView.Adapter<ComplainListAdapte
                 @Override
                 public void onClick(View view) {
                     int pos=getLayoutPosition();
+                    view.getContext().startActivity(new Intent(view.getContext(),ViewComplainActivity.class)
+                            .putExtra("complainid",complainListData.get(pos).getComplainid()));
+
+                    Intent intent = new Intent(view.getContext(), ViewComplainActivity.class);
+                    intent.putExtra("complainid",String.valueOf(complainListData.get(pos).getComplainid()));
+                    intent.putExtra("title",complainListData.get(pos).getTitle());
+                    intent.putExtra("detail",complainListData.get(pos).getDetail());
+                    intent.putExtra("hostelid",String.valueOf(complainListData.get(pos).getHostelid()));
+                    intent.putExtra("hostelname",complainListData.get(pos).getHostelname());
+                    intent.putExtra("blockid",String.valueOf(complainListData.get(pos).getBlockid()));
+                    intent.putExtra("blockname",complainListData.get(pos).getBlockname());
+                    intent.putExtra("roomid",String.valueOf(complainListData.get(pos).getRoomid()));
+                    intent.putExtra("roomno",complainListData.get(pos).getRoomnono());
+                    intent.putExtra("studentid",String.valueOf(complainListData.get(pos).getStudentid()));
+                    intent.putExtra("name",complainListData.get(pos).getStudentname());
+                    intent.putExtra("status",String.valueOf(complainListData.get(pos).getStatus()));
+                    view.getContext().startActivity(intent);
 
                 }
             });

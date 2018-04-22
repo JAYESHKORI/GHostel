@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.jayesh.ghostel.Fragment.GenerateQR;
+import com.example.jayesh.ghostel.Fragment.HostelList;
 import com.example.jayesh.ghostel.Fragment.RectorList;
 import com.example.jayesh.ghostel.Fragment.RaiseComplain;
 import com.example.jayesh.ghostel.R;
@@ -35,6 +36,11 @@ public class StudentActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
+
+        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        tx.replace(R.id.screen_area,new GenerateQR());
+        tx.commit();
+
         session = new Session(StudentActivity.this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -79,8 +85,6 @@ public class StudentActivity extends AppCompatActivity
             fragment = new GenerateQR();
         } else if (id == R.id.nav_raise_complain) {
             fragment = new RaiseComplain();
-        } else if (id == R.id.nav_request) {
-            fragment = new RectorList();
         }
         if (fragment!=null)
         {

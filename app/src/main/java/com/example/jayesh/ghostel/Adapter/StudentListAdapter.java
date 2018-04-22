@@ -92,7 +92,8 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
                 @Override
                 public void onClick(View view) {
                     int pos=getLayoutPosition();
-
+                    view.getContext().startActivity(new Intent(view.getContext(),ViewStudentActivity.class)
+                            .putExtra("studentid",commonData.get(pos).getId()));
                 }
             });
         }

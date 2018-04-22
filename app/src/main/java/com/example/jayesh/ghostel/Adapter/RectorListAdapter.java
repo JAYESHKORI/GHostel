@@ -93,7 +93,8 @@ public class RectorListAdapter extends RecyclerView.Adapter<RectorListAdapter.My
                 @Override
                 public void onClick(View view) {
                     int pos=getLayoutPosition();
-
+                    view.getContext().startActivity(new Intent(view.getContext(),ViewRectorActivity.class)
+                            .putExtra("rectorid",commonData.get(pos).getId()));
                 }
             });
         }
