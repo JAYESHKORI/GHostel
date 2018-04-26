@@ -122,6 +122,11 @@ public class AdminActivity extends AppCompatActivity
         int id = item.getItemId();
         switch (id)
         {
+            case R.id.chngdp:
+                break;
+            case R.id.chngpwd:
+                startActivity(new Intent(AdminActivity.this,ChangePasswordActivity.class));
+                break;
             case R.id.settings:
                 break;
             case R.id.logout:

@@ -69,5 +69,6 @@ public class Const
     public static final String API_DELCONTRACTOR = "deleteContractor.php";
     public static final String API_DELROOM = "deleteRoom.php";
     public static final String API_REGCOMPLAIN = "addComplain.php";
+    public static final String API_CHANGEPASSWORD = "changePassword.php";
 
 }
