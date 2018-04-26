@@ -1,6 +1,7 @@
 package com.example.jayesh.ghostel.Adapter;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,14 +11,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.jayesh.ghostel.Activity.EditBlockActivity;
 import com.example.jayesh.ghostel.Activity.ViewBlockActivity;
 import com.example.jayesh.ghostel.Activity.ViewHostelActivity;
 import com.example.jayesh.ghostel.Model.BlockListData;
 import com.example.jayesh.ghostel.R;
+import com.example.jayesh.ghostel.Utils.Const;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jayesh on 19/2/18.
@@ -68,6 +79,7 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.MyVi
                                     view.getContext().startActivity(intent);
                                     break;
                                 case 2:
+                                    deleteBlock(blockListData.get(pos).getBlockid());
                                     break;
                             }
                         }
@@ -117,5 +129,40 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.MyVi
     @Override
     public int getItemCount() {
         return blockListData.size();
+    }
+
+    private void deleteBlock(final int blockid) {
+        final ProgressDialog progressDialog = new ProgressDialog(caller);
+        progressDialog.setMessage("Deleting...");
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Const.API_URL
+                + Const.API_DELBLOCK,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("response",response);
+                        progressDialog.dismiss();
+                        Toast.makeText(caller,response,Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Log.e("Error",error.toString());
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("blockid",String.valueOf(blockid));
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(caller);
+        requestQueue.add(stringRequest);
     }
 }

@@ -55,8 +55,9 @@
             android:name=".Activity.RectorActivity"
             android:label="@string/title_activity_rector"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.RectorAddStudent"></activity>
+        <activity android:name=".Activity.RectorAddStudent" />
         <activity android:name=".Activity.RectorAddRoom" />
+        <activity android:name=".Activity.ViewRoomActivity"></activity>
     </application>
 
 </manifest>

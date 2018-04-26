@@ -20,6 +20,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jayesh.ghostel.Activity.ViewBlockActivity;
+import com.example.jayesh.ghostel.Activity.ViewRectorActivity;
+import com.example.jayesh.ghostel.Activity.ViewRoomActivity;
 import com.example.jayesh.ghostel.Model.BlockListData;
 import com.example.jayesh.ghostel.Model.RoomListData;
 import com.example.jayesh.ghostel.R;
@@ -58,7 +60,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.MyView
                 @Override
                 public boolean onLongClick(final View view) {
                     final int pos=getLayoutPosition();
-                    final CharSequence[] items = { "Delete"};
+                    final CharSequence[] items = { "View","Delete"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
                     builder.setTitle(roomListData.get(pos).getRoomno());
@@ -68,6 +70,14 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.MyView
                             switch (item)
                             {
                                 case 0:
+                                    Intent intent = new Intent(view.getContext(), ViewRoomActivity.class);
+                                    intent.putExtra("roomid",roomListData.get(pos).getRoomid());
+                                    intent.putExtra("roomno",roomListData.get(pos).getRoomno());
+                                    intent.putExtra("capacity",String.valueOf(roomListData.get(pos).getCapacity()));
+                                    intent.putExtra("current_no",String.valueOf(roomListData.get(pos).getCurrent_no()));
+                                    view.getContext().startActivity(intent);
+                                    break;
+                                case 1:
                                     showwarning("Warning!","Do you really want to delete this record permenantly?",roomListData.get(pos).getRoomid());
                                     break;
                             }
@@ -82,7 +92,12 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.MyView
                 @Override
                 public void onClick(View view) {
                     int pos=getLayoutPosition();
-                    System.out.println("Click: "+ roomListData.get(pos).getBlockid());
+                    Intent intent = new Intent(view.getContext(), ViewRoomActivity.class);
+                    intent.putExtra("roomid",roomListData.get(pos).getRoomid());
+                    intent.putExtra("roomno",roomListData.get(pos).getRoomno());
+                    intent.putExtra("capacity",String.valueOf(roomListData.get(pos).getCapacity()));
+                    intent.putExtra("current_no",String.valueOf(roomListData.get(pos).getCurrent_no()));
+                    view.getContext().startActivity(intent);
                 }
             });
         }

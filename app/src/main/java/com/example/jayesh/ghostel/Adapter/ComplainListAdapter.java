@@ -76,9 +76,6 @@ public class ComplainListAdapter extends RecyclerView.Adapter<ComplainListAdapte
                             switch (item)
                             {
                                 case 0:
-                                    view.getContext().startActivity(new Intent(view.getContext(),ViewComplainActivity.class)
-                                            .putExtra("complainid",complainListData.get(pos).getComplainid()));
-
                                     Intent intent = new Intent(view.getContext(), ViewComplainActivity.class);
                                     intent.putExtra("complainid",String.valueOf(complainListData.get(pos).getComplainid()));
                                     intent.putExtra("title",complainListData.get(pos).getTitle());
@@ -106,9 +103,6 @@ public class ComplainListAdapter extends RecyclerView.Adapter<ComplainListAdapte
                 @Override
                 public void onClick(View view) {
                     int pos=getLayoutPosition();
-                    view.getContext().startActivity(new Intent(view.getContext(),ViewComplainActivity.class)
-                            .putExtra("complainid",complainListData.get(pos).getComplainid()));
-
                     Intent intent = new Intent(view.getContext(), ViewComplainActivity.class);
                     intent.putExtra("complainid",String.valueOf(complainListData.get(pos).getComplainid()));
                     intent.putExtra("title",complainListData.get(pos).getTitle());

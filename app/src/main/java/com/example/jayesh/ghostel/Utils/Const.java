@@ -31,8 +31,8 @@ public class Const
     public static String API_ALERT = "MyRunningRecord";
 
 
-//    public static final String API_URL = "http://192.168.43.31/ghostel/";
-    public static final String API_URL = "https://ghostel.000webhostapp.com/";
+    public static final String API_URL = "http://192.168.43.31/ghostel/";
+//    public static final String API_URL = "https://ghostel.000webhostapp.com/";
     public static final String API_HOSTELLIST = "hostellist.php";
     public static final String API_BLOCKLIST = "blocklist.php";
     public static final String API_ROOMLIST = "roomlist.php";
@@ -53,6 +53,7 @@ public class Const
     public static final String API_VALIDATEQR = "validateCode.php";
     public static final String API_VIEWHOSTEL = "viewHostel.php";
     public static final String API_VIEWBLOCK = "viewBlock.php";
+    public static final String API_VIEWROOM = "viewRoom.php";
     public static final String API_VIEWSTUDENT = "viewStudent.php";
     public static final String API_VIEWRECTOR = "viewRector.php";
     public static final String API_VIEWCONTRACTOR = "viewContractor.php";
@@ -60,6 +61,8 @@ public class Const
     public static final String API_EDITRECTOR = "editRector.php";
     public static final String API_EDITCONTRACTOR = "editContractor.php";
     public static final String API_EDITHOSTEL = "editHostel.php";
+    public static final String API_DELHOSTEL = "deleteHostel.php";
+    public static final String API_DELBLOCK = "deleteBlock.php";
     public static final String API_EDITBLOCK = "editBlock.php";
     public static final String API_DELSTUDENT = "deleteStudent.php";
     public static final String API_DELRECTOR = "deleteRector.php";
