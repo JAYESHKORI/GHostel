@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -167,6 +168,9 @@ public class AddContractor extends AppCompatActivity{
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
                                 response = jsonObject.getString("response");
+                                SmsManager sms = SmsManager.getDefault();
+                                sms.sendTextMessage(et_contact.getText().toString(), null, "" +
+                                        "Your username is your Email and Password is :"+tv_dob.getText().toString(), null, null);
                                 Toast.makeText(AddContractor.this,response,Toast.LENGTH_LONG).show();
                                 iv_dp.setImageResource(0);
                             } catch (JSONException e) {

@@ -231,6 +231,7 @@ public class ContractorActivity extends AppCompatActivity implements ZXingScanne
         switch (id)
         {
             case R.id.chngdp:
+                startActivity(new Intent(ContractorActivity.this,ChangeProfileActivity.class));
                 break;
             case R.id.chngpwd:
                 startActivity(new Intent(ContractorActivity.this,ChangePasswordActivity.class));

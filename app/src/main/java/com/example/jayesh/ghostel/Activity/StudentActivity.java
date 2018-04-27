@@ -110,6 +110,7 @@ public class StudentActivity extends AppCompatActivity
         switch (id)
         {
             case R.id.chngdp:
+                startActivity(new Intent(StudentActivity.this,ChangeProfileActivity.class));
                 break;
             case R.id.chngpwd:
                 startActivity(new Intent(StudentActivity.this,ChangePasswordActivity.class));

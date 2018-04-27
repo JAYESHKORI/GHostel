@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -230,6 +231,9 @@ public class AdminAddStudent extends AppCompatActivity {
                                 JSONObject jsonObject = new JSONObject(response);
                                 response = jsonObject.getString("response");
                                 Toast.makeText(AdminAddStudent.this,response,Toast.LENGTH_LONG).show();
+                                SmsManager sms = SmsManager.getDefault();
+                                sms.sendTextMessage(et_contact.getText().toString(), null, "" +
+                                        "Your username is your Email and Password is :"+tv_dob.getText().toString(), null, null);
                                 startActivity(new Intent(AdminAddStudent.this,AdminActivity.class));
                                 finish();
                             } catch (JSONException e) {

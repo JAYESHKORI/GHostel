@@ -123,6 +123,7 @@ public class AdminActivity extends AppCompatActivity
         switch (id)
         {
             case R.id.chngdp:
+                startActivity(new Intent(AdminActivity.this,ChangeProfileActivity.class));
                 break;
             case R.id.chngpwd:
                 startActivity(new Intent(AdminActivity.this,ChangePasswordActivity.class));

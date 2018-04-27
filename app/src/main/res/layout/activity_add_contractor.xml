@@ -28,24 +28,21 @@ tools:context="com.example.jayesh.ghostel.Activity.AddContractor">
             android:layout_height="wrap_content"
             android:hint="First Name"
             android:id="@+id/addCont_et_fname"
-            android:layout_margin="20dp"
-            android:text="Ramanbhai"/>
+            android:layout_margin="20dp" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Last Name"
             android:id="@+id/addCont_et_lname"
-            android:layout_margin="20dp"
-            android:text="Chaganbhai"/>
+            android:layout_margin="20dp" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Middle Name"
             android:id="@+id/addCont_et_mname"
-            android:layout_margin="20dp"
-            android:text="Desai"/>
+            android:layout_margin="20dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -53,8 +50,7 @@ tools:context="com.example.jayesh.ghostel.Activity.AddContractor">
             android:hint="Select Date"
             android:id="@+id/addCont_tv_dob"
             android:textSize="18dp"
-            android:layout_margin="20dp"
-            android:text="23-8-1998"/>
+            android:layout_margin="20dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -62,8 +58,7 @@ tools:context="com.example.jayesh.ghostel.Activity.AddContractor">
             android:hint="Email"
             android:id="@+id/addCont_et_email"
             android:layout_margin="20dp"
-            android:inputType="textEmailAddress"
-            android:text="Ramanbhai@gmail.com"/>
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:layout_width="match_parent"
@@ -71,8 +66,7 @@ tools:context="com.example.jayesh.ghostel.Activity.AddContractor">
             android:hint="Contact"
             android:id="@+id/addCont_et_contact"
             android:layout_margin="20dp"
-            android:inputType="phone"
-            android:text="0987654321"/>
+            android:inputType="phone" />
 
         <EditText
             android:layout_width="match_parent"
@@ -80,8 +74,7 @@ tools:context="com.example.jayesh.ghostel.Activity.AddContractor">
             android:hint="Permenant Address"
             android:id="@+id/addCont_et_address"
             android:layout_margin="20dp"
-            android:minLines="2"
-            android:text="2,narol,ahmedabad"/>
+            android:minLines="2" />
 
         <EditText
             android:layout_width="match_parent"
@@ -89,8 +82,7 @@ tools:context="com.example.jayesh.ghostel.Activity.AddContractor">
             android:hint="Emergency Contact"
             android:id="@+id/addCont_et_em_contact"
             android:layout_margin="20dp"
-            android:inputType="phone"
-            android:text="0987654321"/>
+            android:inputType="phone" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:layout_width="match_parent"
@@ -113,7 +105,6 @@ tools:context="com.example.jayesh.ghostel.Activity.AddContractor">
             android:text="CREATE CONTRACTOR"
             android:layout_gravity="center_horizontal"
             android:layout_margin="20dp"/>
-
     </LinearLayout>
 </ScrollView>
 </RelativeLayout>

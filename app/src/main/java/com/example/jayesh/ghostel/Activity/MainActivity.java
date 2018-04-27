@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> granted = permissionManager.getStatus().get(0).granted;
         ArrayList<String> denied = permissionManager.getStatus().get(0).denied;
 
-        if(granted.size()==4)
+        if(granted.size()==5)
         {
             if(session.getid()!=0)
             {

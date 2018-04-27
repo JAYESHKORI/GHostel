@@ -29,32 +29,28 @@ tools:context="com.example.jayesh.ghostel.Activity.AdminAddStudent">
             android:hint="Enrollment No"
             android:id="@+id/addSt_et_entoll"
             android:layout_margin="20dp"
-            android:inputType="number"
-            android:text="14012021016"/>
+            android:inputType="number" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="First Name"
             android:id="@+id/addSt_et_fname"
-            android:layout_margin="20dp"
-            android:text="Ramanbhai"/>
+            android:layout_margin="20dp" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Middle Name"
             android:id="@+id/addSt_et_mname"
-            android:layout_margin="20dp"
-            android:text="Chaganbhai"/>
+            android:layout_margin="20dp" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Last Name"
             android:id="@+id/addSt_et_lname"
-            android:layout_margin="20dp"
-            android:text="Desai"/>
+            android:layout_margin="20dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -62,8 +58,7 @@ tools:context="com.example.jayesh.ghostel.Activity.AdminAddStudent">
             android:hint="Select Date"
             android:id="@+id/addSt_tv_dob"
             android:textSize="18dp"
-            android:layout_margin="20dp"
-            android:text="23-8-1998"/>
+            android:layout_margin="20dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -71,8 +66,7 @@ tools:context="com.example.jayesh.ghostel.Activity.AdminAddStudent">
             android:hint="Email"
             android:id="@+id/addSt_et_email"
             android:layout_margin="20dp"
-            android:inputType="textEmailAddress"
-            android:text="Ramanbhai@gmail.com"/>
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:layout_width="match_parent"
@@ -80,8 +74,7 @@ tools:context="com.example.jayesh.ghostel.Activity.AdminAddStudent">
             android:hint="Contact"
             android:id="@+id/addSt_et_contact"
             android:layout_margin="20dp"
-            android:inputType="phone"
-            android:text="0987654321"/>
+            android:inputType="phone" />
 
         <EditText
             android:layout_width="match_parent"
@@ -89,17 +82,15 @@ tools:context="com.example.jayesh.ghostel.Activity.AdminAddStudent">
             android:hint="Permenant Address"
             android:id="@+id/addSt_et_address"
             android:layout_margin="20dp"
-            android:minLines="2"
-            android:text="2,narol,ahmedabad"/>
+            android:minLines="2" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Emergency Contact"
+            android:hint="Parent Contact"
             android:id="@+id/addSt_et_parentcontact"
             android:layout_margin="20dp"
-            android:inputType="phone"
-            android:text="0987654321"/>
+            android:inputType="phone" />
 
         <EditText
             android:layout_width="match_parent"
@@ -107,17 +98,15 @@ tools:context="com.example.jayesh.ghostel.Activity.AdminAddStudent">
             android:hint="Emergency Contact"
             android:id="@+id/addSt_et_em_contact"
             android:layout_margin="20dp"
-            android:inputType="phone"
-            android:text="0987654321"/>
+            android:inputType="phone" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Permenant Address"
+            android:hint="College"
             android:id="@+id/addSt_et_college"
             android:layout_margin="20dp"
-            android:minLines="2"
-            android:text="U.V. Patel College of Engineering"/>
+            android:minLines="2" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:layout_width="match_parent"

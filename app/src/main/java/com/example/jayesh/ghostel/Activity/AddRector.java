@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -168,6 +169,9 @@ public class AddRector extends AppCompatActivity{
                                 JSONObject jsonObject = new JSONObject(response);
                                 response = jsonObject.getString("response");
                                 Toast.makeText(AddRector.this,response,Toast.LENGTH_LONG).show();
+                                SmsManager sms = SmsManager.getDefault();
+                                sms.sendTextMessage(et_contact.getText().toString(), null, "" +
+                                        "Your username is your Email and Password is :"+tv_dob.getText().toString(), null, null);
                                 iv_dp.setImageResource(0);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -234,6 +238,14 @@ public class AddRector extends AppCompatActivity{
         startActivityForResult(intent,IMG_REQUEST);
     }
 
+    private String imageToString(Bitmap bitmap)
+    {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        byte[] imgBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgBytes,Base64.DEFAULT);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -250,14 +262,6 @@ public class AddRector extends AppCompatActivity{
                 e.printStackTrace();
             }
         }
-    }
-
-    private String imageToString(Bitmap bitmap)
-    {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
-        byte[] imgBytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(imgBytes,Base64.DEFAULT);
     }
 
     private void load_hostelList()
