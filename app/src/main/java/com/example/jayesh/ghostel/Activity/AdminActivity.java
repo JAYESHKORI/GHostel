@@ -138,7 +138,7 @@ public class AdminActivity extends AppCompatActivity
                 session.sethostelid(-1);
                 session.setblockid(-1);
                 startActivity(new Intent(AdminActivity.this,MainActivity.class));
-                finish();
+                finishAffinity();
                 break;
         }
         return true;

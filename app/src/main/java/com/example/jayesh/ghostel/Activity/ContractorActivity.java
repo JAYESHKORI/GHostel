@@ -243,7 +243,7 @@ public class ContractorActivity extends AppCompatActivity implements ZXingScanne
                 session.setUsername("");
                 session.setUsertype("X");
                 startActivity(new Intent(ContractorActivity.this,MainActivity.class));
-                finish();
+                finishAffinity();
                 break;
         }
         return true;

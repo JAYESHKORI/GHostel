@@ -7,80 +7,83 @@
     android:orientation="vertical"
     tools:context="com.example.jayesh.ghostel.Activity.ViewRoomActivity">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <RelativeLayout
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_roomno"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/colorLochinvar"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:background="@drawable/back"
+            android:text="Room no" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/relativelayout1"
+            android:layout_below="@id/tv_roomno"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:background="@color/colorTradewind">
+
             <TextView
-                android:id="@+id/tv_roomno"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:layout_margin="10dp"
-                android:textColor="@color/colorLochinvar"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:background="@drawable/back"
-                android:text="Room no" />
-            <RelativeLayout
+                android:text="Capacity"
+                android:layout_alignParentLeft="true"/>
+
+            <TextView
+                android:id="@+id/tv_capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/relativelayout1"
-                android:layout_below="@id/tv_roomno"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="5dp"
-                android:background="@color/colorTradewind">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:layout_margin="10dp"
-                    android:text="Capacity"
-                    android:layout_alignParentLeft="true"/>
-
-                <TextView
-                    android:id="@+id/tv_capacity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:layout_margin="10dp"
-                    android:layout_alignParentRight="true"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/relativelayout2"
-                android:layout_below="@id/relativelayout1"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="5dp"
-                android:background="@color/colorTradewind">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:layout_margin="10dp"
-                    android:text="Currently Living"
-                    android:layout_alignParentLeft="true"/>
-
-                <TextView
-                    android:id="@+id/tv_current_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:layout_margin="10dp"
-                    android:layout_alignParentRight="true"/>
-            </RelativeLayout>
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/relativelayout2"
-                android:id="@+id/lv_studentlist">
-            </ListView>
+                android:layout_weight="0.5"
+                android:layout_margin="10dp"
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
-    </ScrollView>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/relativelayout2"
+            android:layout_below="@id/relativelayout1"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:background="@color/colorTradewind">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_margin="10dp"
+                android:text="Currently Living"
+                android:layout_alignParentLeft="true"/>
+
+            <TextView
+                android:id="@+id/tv_current_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_margin="10dp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Students Living"
+        android:layout_margin="10dp"
+        android:textSize="15dp"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lv_studentlist"
+        android:layout_margin="10dp"
+        android:background="@drawable/back">
+    </ListView>
 </LinearLayout>

@@ -123,7 +123,7 @@ public class StudentActivity extends AppCompatActivity
                 session.setUsertype("X");
                 session.setImgURL("X");
                 startActivity(new Intent(StudentActivity.this,MainActivity.class));
-                finish();
+                finishAffinity();
                 break;
         }
         return true;

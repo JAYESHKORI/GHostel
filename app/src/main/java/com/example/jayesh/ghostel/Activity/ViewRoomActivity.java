@@ -1,9 +1,12 @@
 package com.example.jayesh.ghostel.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,9 +67,15 @@ public class ViewRoomActivity extends AppCompatActivity {
                                 studentnames.add(jsonArray.getJSONObject(i).getString("name"));
                                 studentids.add(jsonArray.getJSONObject(i).getInt("studentid"));
                             }
-                            Log.d("studentnames",studentnames.toString());
-                            ArrayAdapter<String> AAstudentnames = new ArrayAdapter<String>(ViewRoomActivity.this, android.R.layout.simple_list_item_1,studentnames);
-                            lv_studentlist.setAdapter(AAstudentnames);
+                            ArrayAdapter<String> studentlistAdapter = new ArrayAdapter<String>(ViewRoomActivity.this, android.R.layout.simple_list_item_1, studentnames);
+                            lv_studentlist.setAdapter(studentlistAdapter);
+                            lv_studentlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    startActivity(new Intent(view.getContext(),ViewStudentActivity.class)
+                                            .putExtra("studentid",studentids.get(i)));
+                                }
+                            });
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

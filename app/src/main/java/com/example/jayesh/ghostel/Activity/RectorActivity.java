@@ -124,7 +124,7 @@ public class RectorActivity extends AppCompatActivity
                 session.setUsertype("X");
                 session.setImgURL("X");
                 startActivity(new Intent(RectorActivity.this,MainActivity.class));
-                finish();
+                finishAffinity();
                 break;
         }
         return true;

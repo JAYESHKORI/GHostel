@@ -94,7 +94,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         public void onResponse(String response) {
                             progressDialog.dismiss();
                             Log.d("response",response);
-                            Toast.makeText(LoginActivity.this,response,Toast.LENGTH_SHORT).show();
                             try {
                                 JSONArray jsonArray = new JSONArray(response);
                                 id = jsonArray.getJSONObject(0).getInt("id");
