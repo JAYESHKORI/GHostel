@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -51,6 +52,7 @@ public class StudentList extends Fragment
     private RecyclerView.Adapter commonAdapter;
     private ArrayList<CommonData> commonDataArrayList;
     private FloatingActionButton fab_add_student;
+    private Spinner spn_hostel,spn_block;
 
     private Session session;
 
