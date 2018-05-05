@@ -31,8 +31,8 @@ public class Const
     public static String API_ALERT = "MyRunningRecord";
 
 
-    //public static final String API_URL = "http://192.168.43.31/ghostel/";
-    public static final String API_URL = "https://ghostel.000webhostapp.com/";
+    public static final String API_URL = "http://192.168.43.31/ghostel/";
+    //public static final String API_URL = "https://ghostel.000webhostapp.com/";
     public static final String API_HOSTELLIST = "hostellist.php";
     public static final String API_BLOCKLIST = "blocklist.php";
     public static final String API_ROOMLIST = "roomlist.php";
@@ -71,4 +71,6 @@ public class Const
     public static final String API_REGCOMPLAIN = "addComplain.php";
     public static final String API_CHANGEPASSWORD = "changePassword.php";
     public static final String API_CHANGEPROFILE = "changeProfile.php";
+    public static final String API_POSTCOMMENT = "postComment.php";
+    public static final String API_COMMENTLIST = "commentList.php";
 }

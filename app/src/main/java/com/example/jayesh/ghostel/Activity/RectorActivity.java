@@ -19,9 +19,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.jayesh.ghostel.Fragment.ComplainList;
-import com.example.jayesh.ghostel.Fragment.GenerateQR;
 import com.example.jayesh.ghostel.Fragment.RoomList;
-import com.example.jayesh.ghostel.Fragment.StudentList;
+import com.example.jayesh.ghostel.Fragment.RectorStudentList;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.SharedPrefrences.Session;
 import com.example.jayesh.ghostel.Utils.Const;
@@ -39,7 +38,7 @@ public class RectorActivity extends AppCompatActivity
         setContentView(R.layout.activity_rector);
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.screen_area,new StudentList());
+        tx.replace(R.id.screen_area,new RectorStudentList());
         tx.commit();
 
         session = new Session(RectorActivity.this);
@@ -81,7 +80,7 @@ public class RectorActivity extends AppCompatActivity
         Fragment fragment =null;
 
         if (id == R.id.nav_student) {
-            fragment = new StudentList();
+            fragment = new RectorStudentList();
         } else if (id == R.id.nav_rooms) {
             fragment = new RoomList();
         } else if (id == R.id.nav_complains) {

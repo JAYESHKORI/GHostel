@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.jayesh.ghostel.Fragment.ComplainList;
 import com.example.jayesh.ghostel.Fragment.GenerateQR;
 import com.example.jayesh.ghostel.Fragment.HostelList;
 import com.example.jayesh.ghostel.Fragment.RectorList;
@@ -85,6 +86,8 @@ public class StudentActivity extends AppCompatActivity
             fragment = new GenerateQR();
         } else if (id == R.id.nav_raise_complain) {
             fragment = new RaiseComplain();
+        } else if (id == R.id.nav_view_complain) {
+            fragment = new ComplainList();
         }
         if (fragment!=null)
         {

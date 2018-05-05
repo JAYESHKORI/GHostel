@@ -12,5 +12,9 @@
             android:id="@+id/nav_raise_complain"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Raise Complain" />
+        <item
+            android:id="@+id/nav_view_complain"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="View Complain" />
     </group>
 </menu>

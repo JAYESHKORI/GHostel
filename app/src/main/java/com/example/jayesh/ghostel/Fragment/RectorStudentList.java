@@ -38,7 +38,7 @@ import java.util.Map;
  * Created by jayesh on 2/3/18.
  */
 
-public class StudentList extends Fragment
+public class RectorStudentList extends Fragment
 {
     private static final String ARG_PARAM9 = "param9";
     private static final String ARG_PARAM10 = "param10";
@@ -56,7 +56,7 @@ public class StudentList extends Fragment
 
     private Session session;
 
-    public StudentList() {
+    public RectorStudentList() {
         // Required empty public constructor
     }
 

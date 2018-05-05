@@ -18,13 +18,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.jayesh.ghostel.Fragment.AdminStudentList;
 import com.example.jayesh.ghostel.Fragment.BlockList;
 import com.example.jayesh.ghostel.Fragment.ComplainList;
 import com.example.jayesh.ghostel.Fragment.ContractorList;
 import com.example.jayesh.ghostel.Fragment.HostelList;
 import com.example.jayesh.ghostel.Fragment.RectorList;
 import com.example.jayesh.ghostel.Fragment.RoomList;
-import com.example.jayesh.ghostel.Fragment.StudentList;
 import com.example.jayesh.ghostel.R;
 import com.example.jayesh.ghostel.SharedPrefrences.Session;
 import com.example.jayesh.ghostel.Utils.Const;
@@ -95,7 +95,7 @@ public class AdminActivity extends AppCompatActivity
         } else if (id == R.id.nav_mess) {
             fragment = new ContractorList();
         } else if (id == R.id.nav_student) {
-            fragment = new StudentList();
+            fragment = new AdminStudentList();
         } else if (id == R.id.nav_complains) {
             fragment = new ComplainList();
         }
